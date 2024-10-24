@@ -3,8 +3,7 @@ from core.page import Page
 from tags.html import Body
 from tags.layout import Section, Div, Header, Nav
 from tags.text import H1, Paragraph, Span, Link
-from tags.ui import Button, Form
-
+from tags.ui import Button, Form, Input
 
 if __name__ == "__main__":
     home_page = Page(
@@ -49,7 +48,12 @@ if __name__ == "__main__":
                 ),
             ),
             Link("Click me!", href="https://www.google.com", target="_blank"),
-            Form(method="POST"),
+            Form(
+                Input(name="email", placeholder="Email"),
+                Input(name="name", placeholder="Name"),
+                Input(name="number", placeholder="Number"),
+                method="POST"
+            ),
         )
     )
 
