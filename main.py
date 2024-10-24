@@ -1,7 +1,7 @@
 # ydnatl
 from core.page import Page
 from tags.html import Body
-from tags.layout import Section, Div
+from tags.layout import Section, Div, Header, Nav
 from tags.text import H1, Paragraph, Span, Link
 from tags.ui import Button, Form
 
@@ -28,6 +28,14 @@ if __name__ == "__main__":
 
     hero = Section(
         Body(
+            Header(
+                Link("Home", href="/"),
+                Nav(
+                    Link("About", href="/about"),
+                    Link("Contact", href="/contact"),
+                    Link("Services", href="/services"),
+                )
+            ),
             H1("Hello, World!"),
             Paragraph("This is a paragraph"),
             Span("This is a span"),
@@ -40,7 +48,7 @@ if __name__ == "__main__":
                     Button("Click me!"),
                 ),
             ),
-            Link("Click me!", href="https://www.google.com", class_name="btn"),
+            Link("Click me!", href="https://www.google.com", target="_blank"),
             Form(method="POST"),
         )
     )

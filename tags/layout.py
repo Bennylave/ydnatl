@@ -16,6 +16,11 @@ class Header(HTMLTag):
         super().__init__(*args, **{**kwargs, "tag": "header"})
 
 
+class Nav(HTMLTag):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **{**kwargs, "tag": "nav"})
+
+
 class Footer(HTMLTag):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "footer"})
