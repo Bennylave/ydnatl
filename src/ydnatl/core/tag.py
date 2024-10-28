@@ -96,18 +96,6 @@ class HTMLElement:
         import copy
         return copy.deepcopy(self)
 
-    # def add_class(self, *class_names):
-    #     """ This method adds a class to the current tag. """
-    #     classes = set(self._attributes.get("class", "").split())
-    #     classes.update(class_names)
-    #     self._attributes["class"] = " ".join(classes)
-    #
-    # def remove_class(self, *class_names):
-    #     """ This method removes a class from the current tag. """
-    #     classes = set(self._attributes.get("class", "").split())
-    #     classes.difference_update(class_names)
-    #     self._attributes["class"] = " ".join(classes)
-
     def find_by_attribute(self, attr_name, attr_value):
         """ This method finds a child by an attribute. """
         for child in self._children:

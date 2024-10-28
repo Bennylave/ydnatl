@@ -6,7 +6,6 @@ from tags.text import H1, Paragraph, Span, Link
 from tags.ui import Button, Form, Input
 
 
-
 if __name__ == "__main__":
     home_page = Page(
         title="My Page",
@@ -55,6 +54,8 @@ if __name__ == "__main__":
             ),
         Div("alksdjasdklasdkljald")
     )
+
+    hero.generate("")
 
     # page = HTMLPage()
     # page.template = ""

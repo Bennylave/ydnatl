@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ydnatl_sn"
-version = "0.0.8"
+name = "ydnatl"
+version = "1.0.1"
 authors = [
   { name="Sean Nieuwoudt", email="sean@underwulf.com" },
 ]
