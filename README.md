@@ -7,7 +7,6 @@
 <base>
 <bdi>
 <bdo>
-
 <canvas>
 <caption>
 <col>

@@ -1,7 +1,7 @@
-from core.tag import HTMLTag
+from core.tag import HTMLElement
 
 
-class HTML(HTMLTag):
+class HTML(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{
             **kwargs,
@@ -14,16 +14,16 @@ class HTML(HTMLTag):
         })
 
 
-class Head(HTMLTag):
+class Head(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "head"})
 
 
-class Body(HTMLTag):
+class Body(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "body"})
 
 
-class Title(HTMLTag):
+class Title(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "title"})

@@ -1,12 +1,12 @@
-from core.tag import HTMLTag
+from core.tag import HTMLElement
 
 
-class Textarea(HTMLTag):
+class Textarea(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "textarea"})
 
 
-class Select(HTMLTag):
+class Select(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "select"})
 
@@ -18,36 +18,36 @@ class Select(HTMLTag):
         # return self
 
 
-class Option(HTMLTag):
+class Option(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "option"})
 
 
-class Button(HTMLTag):
+class Button(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "button"})
 
 
-class Fieldset(HTMLTag):
+class Fieldset(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "fieldset"})
 
 
-class Form(HTMLTag):
+class Form(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "form"})
 
 
-class Input(HTMLTag):
+class Input(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "input", "self_closing": True})
 
 
-class Label(HTMLTag):
+class Label(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "label"})
 
 
-class Optgroup(HTMLTag):
+class Optgroup(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "optgroup"})

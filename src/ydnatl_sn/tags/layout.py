@@ -1,36 +1,36 @@
-from core.tag import HTMLTag
+from core.tag import HTMLElement
 
 
-class Div(HTMLTag):
+class Div(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "div"})
 
 
-class Section(HTMLTag):
+class Section(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "section"})
 
 
-class Header(HTMLTag):
+class Header(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "header"})
 
 
-class Nav(HTMLTag):
+class Nav(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "nav"})
 
 
-class Footer(HTMLTag):
+class Footer(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "footer"})
 
 
-class HorizontalRule(HTMLTag):
+class HorizontalRule(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "hr", "self_closing": True})
 
 
-class Main(HTMLTag):
+class Main(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "main"})

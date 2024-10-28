@@ -1,7 +1,7 @@
-from core.tag import HTMLTag
+from core.tag import HTMLElement
 
 
-class UnorderedList(HTMLTag):
+class UnorderedList(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "ul"})
 
@@ -13,7 +13,7 @@ class UnorderedList(HTMLTag):
         # return self
 
 
-class OrderedList(HTMLTag):
+class OrderedList(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "ol"})
 
@@ -25,26 +25,26 @@ class OrderedList(HTMLTag):
         # return self
 
 
-class ListItem(HTMLTag):
+class ListItem(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "li"})
 
 
-class Datalist(HTMLTag):
+class Datalist(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "datalist"})
 
 
-class DescriptionDetails(HTMLTag):
+class DescriptionDetails(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "dd"})
 
 
-class DescriptionList(HTMLTag):
+class DescriptionList(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "dl"})
 
 
-class DescriptionTerm(HTMLTag):
+class DescriptionTerm(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "dt"})

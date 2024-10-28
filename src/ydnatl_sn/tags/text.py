@@ -1,111 +1,111 @@
-from core.tag import HTMLTag
+from core.tag import HTMLElement
 
 
-class H1(HTMLTag):
+class H1(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "h1"})
 
 
-class H2(HTMLTag):
+class H2(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "h2"})
 
 
-class H3(HTMLTag):
+class H3(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "h3"})
 
 
-class H4(HTMLTag):
+class H4(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "h4"})
 
 
-class H5(HTMLTag):
+class H5(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "h5"})
 
 
-class H6(HTMLTag):
+class H6(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "h6"})
 
 
-class Paragraph(HTMLTag):
+class Paragraph(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "p"})
 
 
-class Blockquote(HTMLTag):
+class Blockquote(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "blockquote"})
 
 
-class Pre(HTMLTag):
+class Pre(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "pre"})
 
 
-class Quote(HTMLTag):
+class Quote(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "q"})
 
 
-class Cite(HTMLTag):
+class Cite(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "cite"})
 
 
-class Em(HTMLTag):
+class Em(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "em"})
 
 
-class Italic(HTMLTag):
+class Italic(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "i"})
 
 
-class Span(HTMLTag):
+class Span(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "span"})
 
 
-class Strong(HTMLTag):
+class Strong(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "strong"})
 
 
-class Abbr(HTMLTag):
+class Abbr(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "abbr"})
 
 
-class Link(HTMLTag):
+class Link(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "a"})
 
 
-class Small(HTMLTag):
+class Small(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "small"})
 
 
-class Superscript(HTMLTag):
+class Superscript(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "sup"})
 
 
-class Subscript(HTMLTag):
+class Subscript(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "sub"})
 
 
-class Time(HTMLTag):
+class Time(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "time"})
 
 
-class Code(HTMLTag):
+class Code(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "code"})

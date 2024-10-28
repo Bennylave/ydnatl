@@ -1,7 +1,7 @@
-from core.tag import HTMLTag
+from core.tag import HTMLElement
 
 
-class Table(HTMLTag):
+class Table(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "table"})
 
@@ -14,31 +14,31 @@ class Table(HTMLTag):
         pass
 
 
-class TableFooter(HTMLTag):
+class TableFooter(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "tfoot"})
 
 
-class TableHeaderCell(HTMLTag):
+class TableHeaderCell(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "th"})
 
 
-class TableHeader(HTMLTag):
+class TableHeader(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "thead"})
 
 
-class TableBody(HTMLTag):
+class TableBody(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "tbody"})
 
 
-class TableDataCell(HTMLTag):
+class TableDataCell(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "td"})
 
 
-class TableRow(HTMLTag):
+class TableRow(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "tr"})
