@@ -1,3 +1,6 @@
+from xml.etree.ElementTree import Element
+
+
 class HTMLElement:
     def __init__(self, *args, tag=None, self_closing=False, **attributes):
         self._tag = tag
@@ -7,9 +10,8 @@ class HTMLElement:
         self._attributes = attributes
         self._self_closing = self_closing
 
-        for arg in args:
-            self._add_child(arg)
-
+        # for arg in args:
+        self._add_child([arg for arg in args])
         self.on_load()
 
     def __del__(self):
@@ -47,9 +49,12 @@ class HTMLElement:
 
     def filter(self, condition: callable, recursive=False) -> list:
         """ This method filters the children of the current tag. """
-        return [child for child in self._children if condition(child)] + (
-            [desc for child in self._children for desc in child.filter(condition, recursive=True)] if recursive else []
-        )
+        return [child for child in self._children if condition(child)]
+
+
+        # return [child for child in self._children if condition(child)] + (
+        #     [desc for child in self._children for desc in child.filter(condition, recursive=True)] if recursive else []
+        # )
 
     def remove_all(self, condition: callable):
         """ This method removes all children that meet the condition. """
@@ -166,21 +171,59 @@ class HTMLElement:
     def attributes(self, value: dict) -> None:
         self._attributes = value
 
+    @staticmethod
+    def from_file(file_path: str) -> str:
+        """ This method loads the content of a file. """
+        with open(file_path, "r") as file:
+            return HTMLElement.from_string(file.read())
+
+    @staticmethod
+    def from_string(string: str):
+        """ This method loads the content of a string. """
+        # @TODO: Implement a parser to convert the string to an HTMLElement recursively
+        return string
+
     def render(self) -> str:
         self.on_before_render()
 
-        attributes = " ".join(
-            f'{k if k != "class_name" else "class"}="{v}"' for k, v in self.attributes.items()
-        )
 
-        tag_start = f"<{self.tag} {attributes}".strip()
 
-        if self._self_closing:
-            result = f"{tag_start} />"
-        else:
-            children = ''.join(child.render() for child in self._children) if self._children else ""
-            result = f"{tag_start}>{self._text or ''}{children}</{self.tag}>"
+        # attributes = " ".join(
+        #     f'{k if k != "class_name" else "class"}="{v}"' for k, v in self.attributes.items()
+        # )
+
+        # tag_start = f"<{self.tag} {attributes}".strip()
+
+        # if self._self_closing:
+        #     result = f"{tag_start} />"
+        # else:
+            # children = ''.join(child.render() for child in self._children) if self._children else ""
+            # result = f"{tag_start}>{self._text or ''}{children}</{self.tag}>"
 
         self.on_after_render()
 
-        return result
+
+        return ""
+
+
+
+    # @staticmethod
+    # def from_string(string: str):
+    #     """ This method loads the content of a string. """
+    #     import xml.etree.ElementTree as ET
+    #     element = ET.fromstring(string)
+    #     return HTMLElement._from_etree_element(element)
+    #
+    #
+    # @staticmethod
+    # def _from_etree_element(element):
+    #     tag = element.tag
+    #     attributes = element.attrib
+    #     children = [HTMLElement._from_etree_element(child) for child in element]
+    #     text = element.text or ""
+    #
+    #     html_element = HTMLElement(tag=tag, **attributes)
+    #     html_element._children = children
+    #     html_element._text = text.strip()
+    #
+    #     return html_element
