@@ -6,7 +6,8 @@ ProfileForm
 Navigation
 Footer
 
-
+python -m unittest discover
+ python -m unittest discover tests
 
 
 <!DOCTYPE>

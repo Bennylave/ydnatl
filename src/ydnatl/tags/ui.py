@@ -12,9 +12,12 @@ class Select(HTMLElement):
 
     @staticmethod
     def with_items(*items, **kwargs):
-        opt = Option(**kwargs)
+        opt = Select(**kwargs)
         for item in items:
-            opt.append(item)
+            if isinstance(item, HTMLElement):
+                opt.append(item)
+            else:
+                opt.append(Option(item))
         return opt
 
 
