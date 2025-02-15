@@ -11,11 +11,11 @@ class Select(HTMLElement):
         super().__init__(*args, **{**kwargs, "tag": "select"})
 
     @staticmethod
-    def with_items(*items):
-        pass
-        # for item in items:
-        #     self.add_child(item)
-        # return self
+    def with_items(*items, **kwargs):
+        opt = Option(**kwargs)
+        for item in items:
+            opt.append(item)
+        return opt
 
 
 class Option(HTMLElement):

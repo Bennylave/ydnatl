@@ -1,108 +1,129 @@
-from xml.etree.ElementTree import Element
-
+from typing import Callable, Any, Iterator, Union, List
+import uuid
+import copy
+import os
 
 class HTMLElement:
-    def __init__(self, *args, tag=None, self_closing=False, **attributes):
-        self._tag = tag
-        assert self._tag, "Tag name is required"
-        self._children = []
-        self._text = ""
-        self._attributes = attributes
-        self._self_closing = self_closing
+    def __init__(
+        self,
+        *children: Union['HTMLElement', str, List[Any]],
+        tag: str,
+        self_closing: bool = False,
+        **attributes: str,
+    ):
+        if not tag:
+            raise ValueError("Tag name is required")
+        self._tag: str = tag
+        self._children: List[HTMLElement] = []
+        self._text: str = ""
+        self._attributes: dict = attributes
+        self._self_closing: bool = self_closing
+        
+        if os.environ.get("YDNATL_GENERATE_IDS"):
+            self.generate_id()        
 
-        # for arg in args:
-        self._add_child([arg for arg in args])
+        # Process children (flatten nested lists/tuples)
+        for child in self._flatten(children):
+            self._add_child(child)
+
         self.on_load()
-
-    def __del__(self):
-        self.on_unload()
 
     def __str__(self) -> str:
         return self.render()
 
-    def _add_child(self, arg):
-        """Helper to add children in both prepend and append."""
-        if isinstance(arg, HTMLElement):
-            self._children.append(arg)
-        elif isinstance(arg, str):
-            self._text = arg
-        elif isinstance(arg, list):
-            self._children.extend(arg)
-        else:
-            raise ValueError(f"Invalid argument type {arg}")
-
-    def prepend(self, *args):
-        """ This method prepends children to the current tag. """
-        for arg in args:
-            self._add_child(arg)
-            if isinstance(arg, list):
-                self._children = arg + self._children
+    @staticmethod
+    def _flatten(items: Union[List[Any], tuple]) -> Iterator[Any]:
+        """Recursively flattens nested iterables of children."""
+        for item in items:
+            if isinstance(item, (list, tuple)):
+                yield from HTMLElement._flatten(item)
             else:
-                self._children.insert(0, arg)
-        return args
+                yield item
 
-    def append(self, *args):
-        """ This method appends children to the current tag. """
-        for arg in args:
-            self._add_child(arg)
-        return args
+    def _add_child(self, child: Union['HTMLElement', str]) -> None:
+        """Adds a single child to the element."""
+        if isinstance(child, HTMLElement):
+            self._children.append(child)
+        elif isinstance(child, str):
+            self._text += child
+        else:
+            raise ValueError(f"Invalid child type: {child}")
 
-    def filter(self, condition: callable, recursive=False) -> list:
-        """ This method filters the children of the current tag. """
-        return [child for child in self._children if condition(child)]
+    def prepend(self, *children: Union['HTMLElement', str, List[Any]]) -> None:
+        """Prepends children to the current tag."""
+        new_children: List[HTMLElement] = []
+        for child in self._flatten(children):
+            if isinstance(child, HTMLElement):
+                new_children.append(child)
+            elif isinstance(child, str):
+                # For strings, we simply prepend the text.
+                self._text = child + self._text
+            else:
+                raise ValueError(f"Invalid child type: {child}")
+        self._children = new_children + self._children
 
+    def append(self, *children: Union['HTMLElement', str, List[Any]]) -> None:
+        """Appends children to the current tag."""
+        for child in self._flatten(children):
+            self._add_child(child)
 
-        # return [child for child in self._children if condition(child)] + (
-        #     [desc for child in self._children for desc in child.filter(condition, recursive=True)] if recursive else []
-        # )
+    def filter(
+        self, condition: Callable[[Any], bool], recursive: bool = False
+    ) -> Iterator['HTMLElement']:
+        """Yields children (and optionally descendants) that meet the condition."""
+        for child in self._children:
+            if condition(child):
+                yield child
+            if recursive:
+                yield from child.filter(condition, recursive=True)
 
-    def remove_all(self, condition: callable):
-        """ This method removes all children that meet the condition. """
-        for child in self.filter(condition):
-            self._children.remove(child)
+    def remove_all(self, condition: Callable[[Any], bool]) -> None:
+        """Removes all children that meet the condition."""
+        # Collect matching children first to avoid modifying the list while iterating.
+        to_remove = list(self.filter(condition))
+        for child in to_remove:
+            if child in self._children:
+                self._children.remove(child)
 
-    def pop(self, index: int):
-        """ This method pops a child from the tag. """
+    def pop(self, index: int) -> 'HTMLElement':
+        """Pops a child from the tag."""
         return self._children.pop(index)
 
-    def first(self):
-        """ This method returns the first child of the tag. """
+    def first(self) -> Union['HTMLElement', None]:
+        """Returns the first child of the tag."""
         return self._children[0] if self._children else None
 
-    def last(self):
-        """ This method returns the last child of the tag. """
+    def last(self) -> Union['HTMLElement', None]:
+        """Returns the last child of the tag."""
         return self._children[-1] if self._children else None
 
-    def add_attribute(self, key: str, value: str):
-        """ This method adds an attribute to the current tag. """
+    def add_attribute(self, key: str, value: str) -> None:
+        """Adds an attribute to the current tag."""
         self._attributes[key] = value
 
-    def remove_attribute(self, key: str):
-        """ This method removes an attribute from the current tag. """
+    def remove_attribute(self, key: str) -> None:
+        """Removes an attribute from the current tag."""
         self._attributes.pop(key, None)
 
-    def get_attribute(self, key: str):
-        """ This method gets an attribute from the current tag. """
+    def get_attribute(self, key: str) -> Union[str, None]:
+        """Gets an attribute from the current tag."""
         return self._attributes.get(key)
 
-    def has_attribute(self, key: str):
-        """ This method checks if an attribute exists in the current tag. """
+    def has_attribute(self, key: str) -> bool:
+        """Checks if an attribute exists in the current tag."""
         return key in self._attributes
 
-    def generate_id(self):
-        """ This method generates an id for the current tag. """
-        import uuid
-
+    def generate_id(self) -> None:
+        """Generates an id for the current tag if not already present."""
         if "id" not in self._attributes:
-            self._attributes["id"] = f"el-{str(uuid.uuid4())[0:6]}"
+            self._attributes["id"] = f"el-{str(uuid.uuid4())[:6]}"
 
-    def clone(self):
-        """ This method clones the current tag. """
-        import copy
+    def clone(self) -> 'HTMLElement':
+        """Clones the current tag."""
         return copy.deepcopy(self)
 
-    def find_by_attribute(self, attr_name, attr_value):
-        """ This method finds a child by an attribute. """
+    def find_by_attribute(self, attr_name: str, attr_value: Any) -> Union['HTMLElement', None]:
+        """Finds a child by an attribute."""
         for child in self._children:
             if child.get_attribute(attr_name) == attr_value:
                 return child
@@ -111,28 +132,30 @@ class HTMLElement:
                 return nested_result
         return None
 
-    def get_attributes(self, *keys) -> dict:
-        """ This method returns the attributes of the current tag. """
-        return {key: self._attributes.get(key) for key in keys} if keys else self._attributes
+    def get_attributes(self, *keys: str) -> dict:
+        """Returns the attributes of the current tag."""
+        if keys:
+            return {key: self._attributes.get(key) for key in keys}
+        return self._attributes
 
-    def count_children(self):
-        """ This method returns the number of children in the current tag. """
+    def count_children(self) -> int:
+        """Returns the number of children in the current tag."""
         return len(self._children)
 
-    def on_load(self):
-        """ This is a callback method that is called when the tag is loaded. """
+    def on_load(self) -> None:
+        """Callback called when the tag is loaded."""
         pass
 
-    def on_before_render(self):
-        """ This is a callback method that is called before the tag is rendered. """
+    def on_before_render(self) -> None:
+        """Callback called before the tag is rendered."""
         pass
 
-    def on_after_render(self):
-        """ This is a callback method that is called after the tag is rendered. """
+    def on_after_render(self) -> None:
+        """Callback called after the tag is rendered."""
         pass
 
-    def on_unload(self):
-        """ This is a callback method that is called when the tag is unloaded. """
+    def on_unload(self) -> None:
+        """Callback called when the tag is unloaded."""
         pass
 
     @property
@@ -144,20 +167,16 @@ class HTMLElement:
         self._tag = value
 
     @property
-    def children(self) -> list:
-        return self._children or []
-
-    @property
-    def self_closing(self) -> bool:
-        return self._self_closing
+    def children(self) -> List['HTMLElement']:
+        return self._children
 
     @children.setter
-    def children(self, value: list) -> None:
+    def children(self, value: List['HTMLElement']) -> None:
         self._children = value
 
     @property
     def text(self) -> str:
-        return self._text or ""
+        return self._text
 
     @text.setter
     def text(self, value: str) -> None:
@@ -165,65 +184,39 @@ class HTMLElement:
 
     @property
     def attributes(self) -> dict:
-        return self._attributes or {}
+        return self._attributes
 
     @attributes.setter
     def attributes(self, value: dict) -> None:
         self._attributes = value
 
-    @staticmethod
-    def from_file(file_path: str) -> str:
-        """ This method loads the content of a file. """
-        with open(file_path, "r") as file:
-            return HTMLElement.from_string(file.read())
+    @property
+    def self_closing(self) -> bool:
+        return self._self_closing
 
-    @staticmethod
-    def from_string(string: str):
-        """ This method loads the content of a string. """
-        # @TODO: Implement a parser to convert the string to an HTMLElement recursively
-        return string
+    @self_closing.setter
+    def self_closing(self, value: bool) -> None:
+        self._self_closing = value
+
+    def _render_attributes(self) -> str:
+        """
+        Returns a string of HTML attributes for the tag.
+        """
+        attr_str = " ".join(
+            f'{("class" if k == "class_name" else k)}="{v}"'
+            for k, v in self._attributes.items()
+        )
+        return f" {attr_str}" if attr_str else ""
 
     def render(self) -> str:
+        """Renders the HTML element and its children to a string."""
         self.on_before_render()
-
-
-
-        # attributes = " ".join(
-        #     f'{k if k != "class_name" else "class"}="{v}"' for k, v in self.attributes.items()
-        # )
-
-        # tag_start = f"<{self.tag} {attributes}".strip()
-
-        # if self._self_closing:
-        #     result = f"{tag_start} />"
-        # else:
-            # children = ''.join(child.render() for child in self._children) if self._children else ""
-            # result = f"{tag_start}>{self._text or ''}{children}</{self.tag}>"
-
+        attributes = self._render_attributes()
+        tag_start = f"<{self._tag}{attributes}"
+        if self._self_closing:
+            result = f"{tag_start} />"
+        else:
+            children_html = "".join(child.render() for child in self._children)
+            result = f"{tag_start}>{self._text}{children_html}</{self._tag}>"
         self.on_after_render()
-
-
-        return ""
-
-
-
-    # @staticmethod
-    # def from_string(string: str):
-    #     """ This method loads the content of a string. """
-    #     import xml.etree.ElementTree as ET
-    #     element = ET.fromstring(string)
-    #     return HTMLElement._from_etree_element(element)
-    #
-    #
-    # @staticmethod
-    # def _from_etree_element(element):
-    #     tag = element.tag
-    #     attributes = element.attrib
-    #     children = [HTMLElement._from_etree_element(child) for child in element]
-    #     text = element.text or ""
-    #
-    #     html_element = HTMLElement(tag=tag, **attributes)
-    #     html_element._children = children
-    #     html_element._text = text.strip()
-    #
-    #     return html_element
+        return result

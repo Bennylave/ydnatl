@@ -1,25 +1,19 @@
-# ydnatl
-from src.ydnatl.core.page import Page
 from src.ydnatl.tags.html import Body
 from src.ydnatl.tags.layout import Section, Div, Header, Nav
 from src.ydnatl.tags.text import H1, Paragraph, Span, Link
 from src.ydnatl.tags.ui import Button, Form, Input
+from src.ydnatl.tags.lists import OrderedList
 
-# from src.ydnatl.tags.page import HTML
-# from src.ydnatl.core.html import Partial
 
 if __name__ == "__main__":
-    items = []
-
-    home_page = Page(
-        title="My Page",
-        meta={},
-        body=Body(
+    items = [{"text": "This is a paragraph"}, {"text": "This is a paragraph"}, {"text": "This is a paragraph"}]
+    
+    b = Body(
             H1("Hello, World!"),
             Paragraph("This is a paragraph"),
             Span("This is a span"),
             Section(
-                # [Div(item.text) for item in items],
+                [Div(item["text"]) for item in items],
                 Div(
                     H1("Hello, World!"),
                     Paragraph("This is a paragraph"),
@@ -28,41 +22,74 @@ if __name__ == "__main__":
                     Button("Click me!"),
                 ),
             ),
-        ),
-    )
+        )
+    
+    # x = b.filter(lambda e: e.tag == "div")
+    
+    # print(b.render())
+    
+    # print(x)
 
-    hero = Section(
-        Header(
-            Link("Home", href="/"),
-            Nav(
-                Link("About", href="/about"),
-                Link("Contact", href="/contact"),
-                Link("Services", href="/services"),
-            ),
-        ),
-        H1("Hello, World!"),
-        Paragraph("This is a paragraph"),
-        Span("This is a span"),
-        Section(
-            Div(
-                H1("Hello, World!"),
-                Paragraph("This is a paragraph"),
-            ),
-            Div(Button("Click me!")),
-        ),
-        Link("Click me!", href="https://www.google.com", target="_blank"),
-        Form(
-            Input(name="email", placeholder="Email"),
-            Input(name="name", placeholder="Name"),
-            Input(name="number", placeholder="Number"),
-            method="POST",
-            action="/submit",
-            charset="utf-8",
-        ),
-        # Div("alksdjasdklasdkljald", data={
-        #     "key": "value"
-        # })
-    )
+    # home_page = Page(
+    #     title="My Page",
+    #     meta={},
+    #     body=Body(
+    #         H1("Hello, World!"),
+    #         Paragraph("This is a paragraph"),
+    #         Span("This is a span"),
+    #         Section(
+    #             # [Div(item.text) for item in items],
+    #             Div(
+    #                 H1("Hello, World!"),
+    #                 Paragraph("This is a paragraph"),
+    #             ),
+    #             Div(
+    #                 Button("Click me!"),
+    #             ),
+    #         ),
+    #     ),
+    # )
+
+    # hero = Section(
+    #     Header(
+    #         Link("Home", href="/"),
+    #         Nav(
+    #             Link("About", href="/about"),
+    #             Link("Contact", href="/contact"),
+    #             Link("Services", href="/services"),
+    #         ),
+    #     ),
+    #     H1("Hello, World!"),
+    #     Paragraph("This is a paragraph"),
+    #     Span("This is a span"),
+    #     Section(
+    #         Div(
+    #             H1("Hello, World!"),
+    #             Paragraph("This is a paragraph"),
+    #         ),
+    #         Div(Button("Click me!")),
+    #     ),
+    #     Link("Click me!", href="https://www.google.com", target="_blank"),
+    #     Form(
+    #         Input(name="email", placeholder="Email"),
+    #         Input(name="name", placeholder="Name"),
+    #         Input(name="number", placeholder="Number"),
+    #         method="POST",
+    #         action="/submit",
+    #         charset="utf-8",
+    #     ),
+    #     # Div("alksdjasdklasdkljald", data={
+    #     #     "key": "value"
+    #     # })
+    # )
+    
+    # para = Paragraph("This is a paragraph")
+    # para.append(Span("This is a span"))
+    # para.append(Link("This is a link", href="https://www.google.com"))
+    # # para.append(Span("This is a span"))
+    # # para.append(Span("This is a span"))
+    # # para.append(Span("This is a span"))
+    # print(para.render())
 
     # html = HTML(Body(
     #     H1("hello world"),
@@ -98,7 +125,7 @@ if __name__ == "__main__":
 
     # hero.append(partial)
 
-    div = Div.from_string("<div>Hello, World!</div>")
+    # div = Div.from_string("<div>Hello, World!</div>")
 
     # https://chatgpt.com/c/6721f16e-5478-8008-a525-2bcf1280022b
 
@@ -133,15 +160,111 @@ if __name__ == "__main__":
     # page.meta = {}
     # page.tracking
 
-    y = hero.append(Paragraph("This is a paragraph at the end"))
+    # y = hero.append(Paragraph("This is a paragraph at the end"))
+
+    # print(hero.render())
 
     # print(y)
     # .append(Paragraph("This is a paragraph in a div"))
 
-    divs = hero.filter(lambda e: e.tag == "div", recursive=True)
-
-    print(divs)
+    # divs = hero.filter(lambda e: e.tag == "div", recursive=True)
+    #
+    # print(divs)
 
     # table = Table.from_csv(file)
 
-    print(hero)
+    # print(hero)
+    #
+    # def fs(value):
+    #     return f"{value}em"
+
+
+    # from src.ydnatl.core.css import CSS
+    # from src.ydnatl.core.css import Reset
+
+    # base_css = Reset()
+
+    # hero = CSS("hero", backgroundColor="red", color="blue")
+
+    # css = CSS(
+    #     backgroundColor="asdasd",
+    #     color="red",
+    #     fontSize=12 / 123,
+    #     fontWeight="bold"
+    # )
+    # css.backgroundColor = "blue"
+    # css.selector = "#hero"
+
+
+
+
+
+    # for i in sizes{
+    #     css = CSS(
+    #         fontSize=fs(i)
+    #     )
+    # }
+
+    # css.append(hero)
+    # css.append(hero)
+
+    # header = Header()
+    # body = body
+    #
+    # Page(header, body, footer).render()
+
+
+
+
+
+
+    # class Component:
+    #     def __init__(self, html, css):
+    #         self.html = html
+    #         self.css = css
+    #
+    #     def render(self):
+    #         return self.html.render(add_classes=True)
+
+
+    # print(css)
+
+    # css.save("styles.css")
+
+    # hero = Section()
+
+    hero = Section(
+        Header(
+            Link("Home", href="/"),
+            Nav(
+                Link("About", href="/about"),
+                Link("Contact", href="/contact"),
+                Link("Services", href="/services"),
+            ),
+        ),
+        H1("Hello, World!"),
+        Paragraph("This is a paragraph"),
+        Span("This is a span"),
+        Section(
+            Div(
+                H1("Hello, World!"),
+                Paragraph("This is a paragraph"),
+            ),
+            Div(Button("Click me!")),
+        ),
+        Link("Click me!", href="https://www.google.com", target="_blank"),
+        Form(
+            Input(name="email", placeholder="Email"),
+            Input(name="name", placeholder="Name"),
+            Input(name="number", placeholder="Number"),
+            method="POST",
+            action="/submit",
+            charset="utf-8",
+        ),
+    )
+    
+    ls = OrderedList.with_items("Item 1", "Item 2", "Item 3")
+    
+    print(ls.render())
+    
+    # print(hero.render())
