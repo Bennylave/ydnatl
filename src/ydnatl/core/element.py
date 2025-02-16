@@ -3,6 +3,7 @@ import uuid
 import copy
 import os
 
+
 class HTMLElement:
     def __init__(
         self,
@@ -13,6 +14,7 @@ class HTMLElement:
     ):
         if not tag:
             raise ValueError("Tag name is required")
+        
         self._tag: str = tag
         self._children: List[HTMLElement] = []
         self._text: str = ""
@@ -22,7 +24,6 @@ class HTMLElement:
         if os.environ.get("YDNATL_GENERATE_IDS"):
             self.generate_id()        
 
-        # Process children (flatten nested lists/tuples)
         for child in self._flatten(children):
             self._add_child(child)
 
@@ -84,6 +85,10 @@ class HTMLElement:
         for child in to_remove:
             if child in self._children:
                 self._children.remove(child)
+                
+    def clear(self) -> None:
+        """Clears all children from the tag."""
+        self._children = []
 
     def pop(self, index: int) -> 'HTMLElement':
         """Pops a child from the tag."""

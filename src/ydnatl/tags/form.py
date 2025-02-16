@@ -39,6 +39,13 @@ class Fieldset(HTMLElement):
 class Form(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "form"})
+        
+    @staticmethod
+    def with_fields(*items, **kwargs):
+        form = Form(**kwargs)
+        for item in items:
+            form.append(item) # TODO: Check if item is a valid field class
+        return form        
 
 
 class Input(HTMLElement):

@@ -48,3 +48,8 @@ class Style(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "style"})
         
+        
+class IFrame(HTMLElement):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **{**kwargs, "tag": "iframe"})
+        
