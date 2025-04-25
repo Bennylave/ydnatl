@@ -1,14 +1,13 @@
 import uuid
 import copy
 import os
-from io import StringIO
 import functools
 
 from typing import Callable, Any, Iterator, Union, List
 
 
 class HTMLElement:
-    __slots__ = ['_tag', '_children', '_text', '_attributes', '_self_closing']
+    __slots__ = ["_tag", "_children", "_text", "_attributes", "_self_closing"]
 
     def __init__(
         self,
@@ -36,6 +35,9 @@ class HTMLElement:
 
     def __str__(self) -> str:
         return self.render()
+    
+    def __del__(self) -> None:
+        self.on_unload()
 
     @staticmethod
     def _flatten(items: Union[List[Any], tuple]) -> Iterator[Any]:
@@ -85,7 +87,6 @@ class HTMLElement:
 
     def remove_all(self, condition: Callable[[Any], bool]) -> None:
         """Removes all children that meet the condition."""
-        # Collect matching children first to avoid modifying the list while iterating.
         to_remove = list(self.filter(condition))
         for child in to_remove:
             if child in self._children:
@@ -95,7 +96,7 @@ class HTMLElement:
         """Clears all children from the tag."""
         self._children = []
 
-    def pop(self, index: int) -> "HTMLElement":
+    def pop(self, index: int = 0) -> "HTMLElement":
         """Pops a child from the tag."""
         return self._children.pop(index)
 
@@ -224,15 +225,15 @@ class HTMLElement:
         self.on_before_render()
         attributes = self._render_attributes()
         tag_start = f"<{self._tag}{attributes}"
-        
+
         if self._self_closing:
             result = f"{tag_start} />"
         else:
             children_html = "".join(child.render() for child in self._children)
             result = f"{tag_start}>{self._text}{children_html}</{self._tag}>"
-        
-        if hasattr(self, '_prefix') and self._prefix:
+
+        if hasattr(self, "_prefix") and self._prefix:
             result = f"{self._prefix}\n{result}"
-        
+
         self.on_after_render()
         return result
