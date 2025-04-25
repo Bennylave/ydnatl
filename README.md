@@ -2,6 +2,12 @@
 
 YDNATL is a Python library that lets you build HTML docs using simple classes. It's great for apps that need HTML generation or rendering, so you can skip the hassle of writing HTML by hand or using a templating engine.
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/underwulf)
+
+## Requirements 
+
+Python 3.6 or higher is recommended
+
 ## Installation
 
 ```bash
