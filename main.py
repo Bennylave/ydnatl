@@ -1,5 +1,5 @@
 import asyncio
-from src.ydnatl.tags.html import Body
+from src.ydnatl.tags.html import Body, HTML, Head, Title
 from src.ydnatl.tags.layout import Section, Div, Header, Nav
 from src.ydnatl.tags.text import H1, Paragraph, Span, Link
 # from src.ydnatl.tags.ui import Button, Form, Input
@@ -7,28 +7,43 @@ from src.ydnatl.tags.lists import OrderedList
 
 
 if __name__ == "__main__":
-    items = [{"text": "This is a paragraph"}, {"text": "This is a paragraph"}, {"text": "This is a paragraph"}]
+    # items = [{"text": "This is a paragraph"}, {"text": "This is a paragraph"}, {"text": "This is a paragraph"}]
     
-    b = Body(
-            H1("Hello, World!"),
-            Paragraph("This is a paragraph"),
-            Span("This is a span"),
-            Section(
-                [Div(item["text"]) for item in items],
-                Div(
-                    H1("Hello, World!"),
-                    Paragraph("This is a paragraph"),
-                ),
-                Div(
-                    # Button("Click me!"),
-                    Div(
-                        Link("Click me!", href="https://www.google.com", target="_blank"),
-                    )
-                ),
-            ),
+    # b = Body(
+    #         H1("Hello, World!"),
+    #         Paragraph("This is a paragraph"),
+    #         Span("This is a span"),
+    #         Section(
+    #             [Div(item["text"]) for item in items],
+    #             Div(
+    #                 H1("Hello, World!"),
+    #                 Paragraph("This is a paragraph"),
+    #             ),
+    #             Div(
+    #                 # Button("Click me!"),
+    #                 Div(
+    #                     Link("Click me!", href="https://www.google.com", target="_blank"),
+    #                 )
+    #             ),
+    #         ),
+    #     )
+    
+    # print(b.render())
+    
+    html = HTML(
+        Head(
+            Title("My Page")
+        ),
+        Body(
+            Div(
+                H1("Hello, World!"),
+                Paragraph("This is a test document.")
+            )
         )
-    
-    print(b.render())
+    )
+
+    # Render the HTML document
+    print(html.render())    
     
     # async def x():
     #     result = await b.render()

@@ -1,9 +1,5 @@
 # YDNATL 
 
-
-python -m src.ydnatl.tests.test_form
-
-
 YDNATL is a Python library that lets you build HTML docs using simple classes. It's great for apps that need HTML generation or rendering, so you can skip the hassle of writing HTML by hand or using a templating engine.
 
 ## Installation
@@ -25,7 +21,7 @@ html = HTML(
     Body(
         Div(
             H1("Hello, World!"),
-            P("This is a test document.")
+            Paragraph("This is a test document.")
         )
     )
 )
@@ -48,6 +44,7 @@ print(html.render())
 - Supports setting attributes of elements
 - Supports counting children of elements
 - Supports self-closing tags
+- Easy to use interface to search, manipulate elements and attributes
 
 ## Examples
 
@@ -68,7 +65,7 @@ async def root():
         Body(
             Section(
                 H1("Hello, World!"),
-                P("This is a test document.")
+                Paragraph("This is a test document.")
             )
         )
     )
@@ -79,7 +76,6 @@ async def root():
 ```python
 from django.shortcuts import render
 from ydnatl import *
-
 
 def index(request):
     return render(request, "index.html", {
@@ -94,8 +90,8 @@ def index(request):
             Body(
                 Section(
                     H1("Hello, World!"),
-                    P("This is a paragraph.),
-                    P("This is another paragraph.")
+                    Paragraph("This is a paragraph.),
+                    Paragraph("This is another paragraph.")
                 )
             )
         )
@@ -120,11 +116,25 @@ def index():
             Body(
                 Section(
                     H1("Hello, World!"),
-                    P("This is a test document.")
+                    Paragraph("This is a test document.")
                 )
             )
         )
     })
+```
+
+## Test Coverage 
+
+YDNATL has 100% test coverage. To run the tests locally, use:
+
+```shell
+python -m unittest discover src/ydnatl/tests
+```
+
+or:
+
+```shell
+python run_test.py
 ```
 
 ## Modules
@@ -164,116 +174,19 @@ def index():
 - Abbr
 - Link
 
+## Future Features
 
+- Component support 
+- More comprehensive examples 
+- Relay the render() method to a pure C implementation for speed
+- Semantic elements like (BlogPost etc)
 
+License
+-----------------
 
+Please see [LICENSE](https://github.com/sn/ydnatl/blob/master/LICENSE) for licensing details.
 
+Author
+-----------------
 
-
-
-
-
-
-
-Components:
-LoginForm
-RegisterForm
-ProfileForm
-
-Navigation
-Footer
-
-python -m unittest discover
- python -m unittest discover tests
-
-
-Examples:
-
-- FastAPI
-- Django
-- Flask
-- Login form
-- Register form
-- Profile form
-- Navigation
-- Footer
-- Header
-- Blog
-- Article
-
-Event hooks 
-Show methods added to each tag 
-Render method
-
-
-
-<area>
-<article>
-<aside>
-<b>
-<base>
-<bdi>
-<bdo>
-<caption>
-<col>
-<colgroup>
-<data>
-<del>
-<details>
-<dfn>
-<dialog>
-<embed>
-<hgroup>
-<ins>
-<kbd>
-<legend>
-<map>
-<mark>
-<meta>
-<meter>
-<nav>
-<noscript>
-<object>
-<option>
-<output>
-<progress>
-<summary>
-<template>
-<track>
-<u>
-<var>
-
-
-# class TestMainTag(unittest.TestCase):
-#     def test_tag_initialization(self):
-#         tag = HTMLTag("Hello", tag="p")
-#         self.assertEqual(tag.tag, "p")
-#         self.assertEqual(tag.text, "Hello")
-#         self.assertEqual(tag.children, [])
-#         self.assertEqual(tag.attributes, {})
-
-#     def test_tag_render(self):
-#         tag = HTMLTag("Hello", tag="p")
-#         self.assertEqual(tag.render(), "<p>Hello</p>")
-
-#     def test_tag_with_children(self):
-#         child1 = HTMLTag("Child 1", tag="span")
-#         child2 = HTMLTag("Child 2", tag="span")
-#         parent = HTMLTag([child1, child2], tag="div")
-#         self.assertEqual(parent.render(), "<div><span>Child 1</span><span>Child 2</span></div>")
-
-
-# class TestSubclasses(unittest.TestCase):
-#     def test_section(self):
-#         section = Section(Div(H1("Hello World!"), Paragraph("This is a paragraph")))
-#         self.assertIn("<section>", section.render())
-#         self.assertIn("</section>", section.render())
-#
-#     def test_div(self):
-#         div = Div(H1("Hello World!"), Paragraph("This is a paragraph"))
-#         self.assertIn("<div>", div.render())
-#         self.assertIn("</div>", div.render())
-#
-#     def test_button(self):
-#         button = Button("Click me!")
-#         self.assertEqual(button.render(), "<button>Click me!</button>")
+[github.com/sn](https://github.com/sn) 
