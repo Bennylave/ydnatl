@@ -44,7 +44,6 @@ print(html.render())
 - Supports setting attributes of elements
 - Supports counting children of elements
 - Supports self-closing tags
-- Easy to use interface to search, manipulate elements and attributes
 
 ## Examples
 
@@ -136,6 +135,42 @@ or:
 ```shell
 python run_test.py
 ```
+
+## Element Methods: 
+
+- Element.prepend
+- Element.append
+- Element.filter
+- Element.remove_all
+- Element.clear
+- Element.pop
+- Element.first
+- Element.last 
+- Element.add_attribute
+- Element.remove_attribute
+- Element.get_attribute
+- Element.has_attribute
+- Element.generate_id
+- Element.clone
+- Element.find_by_attribute
+- Element.get_attributes
+- Element.count_children
+- Element.render
+
+## Events 
+
+- on_load(element)
+- on_before_render(element)
+- on_after_render(element)
+- on_unload(element)
+
+## Element Properties
+
+- tag
+- children
+- text
+- attributes
+- self_closing
 
 ## Modules
 
