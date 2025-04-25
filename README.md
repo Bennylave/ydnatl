@@ -1,6 +1,6 @@
 # YDNATL 
 
-YDNATL is a Python library that lets you build HTML docs using simple classes. It's great for apps that need HTML generation or rendering, so you can skip the hassle of writing HTML by hand or using a templating engine.
+YDNATL is a Python library that lets you build HTML docs using simple classes. It's great for apps that need HTML generation, so you can skip the hassle of writing HTML by hand or using a templating engine.
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/underwulf)
 
@@ -79,58 +79,54 @@ async def root():
 ### Django
 
 ```python
-from django.shortcuts import render
+from django.http import HttpResponse
 from ydnatl import *
 
 def index(request):
-    return render(request, "index.html", {
-        "html": HTML(
-            Head(
-                Title("My Page"),
-                Meta(charset="utf-8"),
-                Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
-                Link(rel="stylesheet", href="style.css"),
-                Script(src="script.js")
-            ),
-            Body(
-                Section(
-                    H1("Hello, World!"),
-                    Paragraph("This is a paragraph.),
-                    Paragraph("This is another paragraph.")
-                )
+    return HttpResponse(HTML(
+        Head(
+            Title("My Page"),
+            Meta(charset="utf-8"),
+            Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
+            Link(rel="stylesheet", href="style.css"),
+            Script(src="script.js")
+        ),
+        Body(
+            Section(
+                H1("Hello, World!"),
+                Paragraph("This is a paragraph."),
+                Paragraph("This is another paragraph.")
             )
         )
-    })
+    ))
 ```
 
 ### Flask
 
 ```python
-from flask import Flask, render_template
+from flask import Flask
 from ydnatl import *
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html", {
-        "html": HTML(
-            Head(
-                Title("My Page")
-            ),
-            Body(
-                Section(
-                    H1("Hello, World!"),
-                    Paragraph("This is a test document.")
-                )
+    return HTML(
+        Head(
+            Title("My Page")
+        ),
+        Body(
+            Section(
+                H1("Hello, World!"),
+                Paragraph("This is a test document.")
             )
         )
-    })
+    )
 ```
 
 ## Test Coverage 
 
-YDNATL has 100% test coverage. To run the tests locally, use:
+YDNATL has `100% test coverage`. To run the tests locally, use:
 
 ```shell
 python -m unittest discover src/ydnatl/tests
@@ -144,83 +140,139 @@ python run_test.py
 
 ## Element Methods: 
 
-- Element.prepend
-- Element.append
-- Element.filter
-- Element.remove_all
-- Element.clear
-- Element.pop
-- Element.first
-- Element.last 
-- Element.add_attribute
-- Element.remove_attribute
-- Element.get_attribute
-- Element.has_attribute
-- Element.generate_id
-- Element.clone
-- Element.find_by_attribute
-- Element.get_attributes
-- Element.count_children
-- Element.render
+- `instance.prepend()`
+- `instance.append()`
+- `instance.filter()`
+- `instance.remove_all()`
+- `instance.clear()`
+- `instance.pop()`
+- `instance.first()`
+- `instance.last()`
+- `instance.add_attribute()`
+- `instance.remove_attribute()`
+- `instance.get_attribute()`
+- `instance.has_attribute()`
+- `instance.generate_id()`
+- `instance.clone()`
+- `instance.find_by_attribute()`
+- `instance.get_attributes()`
+- `instance.count_children()`
+- `instance.render()`
 
 ## Events 
 
-- on_load(element)
-- on_before_render(element)
-- on_after_render(element)
-- on_unload(element)
+- `instance.on_load()`
+- `instance.on_before_render()`
+- `instance.on_after_render()`
+- `instance.on_unload()`
 
 ## Element Properties
 
-- tag
-- children
-- text
-- attributes
-- self_closing
+- `instance.tag`
+- `instance.children`
+- `instance.text`
+- `instance.attributes`
+- `instance.self_closing`
 
 ## Modules
 
-#### src.ydnatl.tags.form
+| **Module**         	| **Purpose**                       	| **Examples** 	|
+|--------------------	|-----------------------------------	|--------------	|
+| ydnatl.tags.form   	| Common HTML form elements         	| Examples     	|
+| ydnatl.tags.html   	| Structural HTML document elements 	| Examples     	|
+| ydnatl.tags.layout 	| Layout related HTML tags          	| Examples     	|
+| ydnatl.tags.lists  	| HTML list elements                	| Examples     	|
+| ydnatl.tags.media  	| Media related HTML elements       	| Examples     	|
+| ydnatl.tags.table  	| HTML table elements               	| Examples     	|
+| ydnatl.tags.text   	| HTML text elements                	| Examples     	|
 
-- Form
-- Input
-- Label
-- Select
-- Option
-- Button
-- Fieldset
+#### ydnatl.tags.form
 
-#### src.ydnatl.tags.layout
+- `Form()`
+- `Input()`
+- `Label()`
+- `Select()`
+- `Option()`
+- `Button()`
+- `Fieldset()`
+- `Optgroup()`
 
-- HTML
-- Head
-- Body
-- Section
-- Div
+#### ydnatl.tags.html
 
-#### src.ydnatl.tags.text
+- `HTML()`
+- `Head()`
+- `Body()`
+- `Title()`
+- `Meta()`
+- `Link()`
+- `Script()`
+- `Style()`
+- `IFrame()`
 
-- H1
-- H2
-- H3
-- H4
-- H5
-- H6
-- P
-- Span
-- Strong
-- Em
-- Italic
-- Cite
-- Abbr
-- Link
+#### ydnatl.tags.layout 
 
-## Future Features
+- `Div()`
+- `Section()`
+- `Header()`
+- `Nav()`
+- `Footer()`
+- `HorizontalRule()`
+- `Main()`
 
-- Component support 
-- More comprehensive examples 
-- Relay the render() method to a pure C implementation for speed
-- Semantic elements like (BlogPost etc)
+#### ydnatl.tags.lists
+
+- `OrderedList()`
+- `ListItem()`
+- `Datalist()`
+- `DescriptionDetails()`
+- `DescriptionList()`
+- `DescriptionTerm()`
+
+#### ydnatl.tags.media
+
+- `Image()`
+- `Video()`
+- `Audio()`
+- `Source()`
+- `Picture()`
+- `Figure()`
+- `Figcaption()`
+- `Canvas()`
+
+#### ydnatl.tags.table
+
+- `Table()`
+- `TableFooter()`
+- `TableHeaderCell()`
+- `TableHeader()`
+- `TableBody()`
+- `TableDataCell()`
+- `TableRow()`
+
+#### ydnatl.tags.text
+
+- `H1()`
+- `H2()`
+- `H3()`
+- `H4()`
+- `H5()`
+- `H6()`
+- `Paragraph()`
+- `Blockquote()`
+- `Pre()`
+- `Quote()`
+- `Cite()`
+- `Em()`
+- `Italic()`
+- `Span()`
+- `Strong()`
+- `Abbr()`
+- `Link()`
+- `Small()`
+- `Superscript()`
+- `Subscript()`
+- `Time()`
+- `Code()`
 
 License
 -----------------
