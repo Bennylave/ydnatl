@@ -36,6 +36,23 @@ html = HTML(
 print(html.render())
 ```
 
+This code will produce:
+
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <title>My Page</title>
+   </head>
+   <body>
+      <div>
+         <h1>Hello, World!</h1>
+         <p>This is a test document.</p>
+      </div>
+   </body>
+</html>
+```
+
 ## Features
 
 - Declarative syntax for building HTML documents (like Flutter)

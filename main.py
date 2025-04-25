@@ -43,7 +43,10 @@ if __name__ == "__main__":
     )
 
     # Render the HTML document
-    print(html.render())    
+    print(html.render())
+
+    # Render the HTML document
+    # print(html.render())    
     
     # async def x():
     #     result = await b.render()
