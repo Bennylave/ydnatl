@@ -18,23 +18,23 @@ class Audio(HTMLElement):
 
 class Source(HTMLElement):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "source"})
+        super().__init__(*args, **{**kwargs, "tag": "source", "self_closing": True})
 
 
 class Picture(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "picture"})
-        
+
 
 class Figure(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "figure"})
-        
-        
+
+
 class Figcaption(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "figcaption"})
-        
+
 
 class Canvas(HTMLElement):
     def __init__(self, *args, **kwargs):

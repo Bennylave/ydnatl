@@ -1,28 +1,33 @@
-from typing import Callable, Any, Iterator, Union, List
 import uuid
 import copy
 import os
+from io import StringIO
+import functools
+
+from typing import Callable, Any, Iterator, Union, List
 
 
 class HTMLElement:
+    __slots__ = ['_tag', '_children', '_text', '_attributes', '_self_closing']
+
     def __init__(
         self,
-        *children: Union['HTMLElement', str, List[Any]],
+        *children: Union["HTMLElement", str, List[Any]],
         tag: str,
         self_closing: bool = False,
         **attributes: str,
     ):
         if not tag:
-            raise ValueError("Tag name is required")
-        
+            raise ValueError("A valid HTML tag name is required")
+
         self._tag: str = tag
         self._children: List[HTMLElement] = []
         self._text: str = ""
         self._attributes: dict = attributes
         self._self_closing: bool = self_closing
-        
+
         if os.environ.get("YDNATL_GENERATE_IDS"):
-            self.generate_id()        
+            self.generate_id()
 
         for child in self._flatten(children):
             self._add_child(child)
@@ -41,7 +46,7 @@ class HTMLElement:
             else:
                 yield item
 
-    def _add_child(self, child: Union['HTMLElement', str]) -> None:
+    def _add_child(self, child: Union["HTMLElement", str]) -> None:
         """Adds a single child to the element."""
         if isinstance(child, HTMLElement):
             self._children.append(child)
@@ -50,7 +55,7 @@ class HTMLElement:
         else:
             raise ValueError(f"Invalid child type: {child}")
 
-    def prepend(self, *children: Union['HTMLElement', str, List[Any]]) -> None:
+    def prepend(self, *children: Union["HTMLElement", str, List[Any]]) -> None:
         """Prepends children to the current tag."""
         new_children: List[HTMLElement] = []
         for child in self._flatten(children):
@@ -63,14 +68,14 @@ class HTMLElement:
                 raise ValueError(f"Invalid child type: {child}")
         self._children = new_children + self._children
 
-    def append(self, *children: Union['HTMLElement', str, List[Any]]) -> None:
+    def append(self, *children: Union["HTMLElement", str, List[Any]]) -> None:
         """Appends children to the current tag."""
         for child in self._flatten(children):
             self._add_child(child)
 
     def filter(
         self, condition: Callable[[Any], bool], recursive: bool = False
-    ) -> Iterator['HTMLElement']:
+    ) -> Iterator["HTMLElement"]:
         """Yields children (and optionally descendants) that meet the condition."""
         for child in self._children:
             if condition(child):
@@ -85,20 +90,20 @@ class HTMLElement:
         for child in to_remove:
             if child in self._children:
                 self._children.remove(child)
-                
+
     def clear(self) -> None:
         """Clears all children from the tag."""
         self._children = []
 
-    def pop(self, index: int) -> 'HTMLElement':
+    def pop(self, index: int) -> "HTMLElement":
         """Pops a child from the tag."""
         return self._children.pop(index)
 
-    def first(self) -> Union['HTMLElement', None]:
+    def first(self) -> Union["HTMLElement", None]:
         """Returns the first child of the tag."""
         return self._children[0] if self._children else None
 
-    def last(self) -> Union['HTMLElement', None]:
+    def last(self) -> Union["HTMLElement", None]:
         """Returns the last child of the tag."""
         return self._children[-1] if self._children else None
 
@@ -123,11 +128,13 @@ class HTMLElement:
         if "id" not in self._attributes:
             self._attributes["id"] = f"el-{str(uuid.uuid4())[:6]}"
 
-    def clone(self) -> 'HTMLElement':
+    def clone(self) -> "HTMLElement":
         """Clones the current tag."""
         return copy.deepcopy(self)
 
-    def find_by_attribute(self, attr_name: str, attr_value: Any) -> Union['HTMLElement', None]:
+    def find_by_attribute(
+        self, attr_name: str, attr_value: Any
+    ) -> Union["HTMLElement", None]:
         """Finds a child by an attribute."""
         for child in self._children:
             if child.get_attribute(attr_name) == attr_value:
@@ -172,11 +179,11 @@ class HTMLElement:
         self._tag = value
 
     @property
-    def children(self) -> List['HTMLElement']:
+    def children(self) -> List["HTMLElement"]:
         return self._children
 
     @children.setter
-    def children(self, value: List['HTMLElement']) -> None:
+    def children(self, value: List["HTMLElement"]) -> None:
         self._children = value
 
     @property
@@ -204,24 +211,28 @@ class HTMLElement:
         self._self_closing = value
 
     def _render_attributes(self) -> str:
-        """
-        Returns a string of HTML attributes for the tag.
-        """
+        """Returns a string of HTML attributes for the tag."""
         attr_str = " ".join(
             f'{("class" if k == "class_name" else k)}="{v}"'
             for k, v in self._attributes.items()
         )
         return f" {attr_str}" if attr_str else ""
 
+    @functools.lru_cache(maxsize=None)
     def render(self) -> str:
         """Renders the HTML element and its children to a string."""
         self.on_before_render()
         attributes = self._render_attributes()
         tag_start = f"<{self._tag}{attributes}"
+        
         if self._self_closing:
             result = f"{tag_start} />"
         else:
             children_html = "".join(child.render() for child in self._children)
             result = f"{tag_start}>{self._text}{children_html}</{self._tag}>"
+        
+        if hasattr(self, '_prefix') and self._prefix:
+            result = f"{self._prefix}\n{result}"
+        
         self.on_after_render()
         return result

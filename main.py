@@ -1,7 +1,8 @@
+import asyncio
 from src.ydnatl.tags.html import Body
 from src.ydnatl.tags.layout import Section, Div, Header, Nav
 from src.ydnatl.tags.text import H1, Paragraph, Span, Link
-from src.ydnatl.tags.ui import Button, Form, Input
+# from src.ydnatl.tags.ui import Button, Form, Input
 from src.ydnatl.tags.lists import OrderedList
 
 
@@ -19,10 +20,28 @@ if __name__ == "__main__":
                     Paragraph("This is a paragraph"),
                 ),
                 Div(
-                    Button("Click me!"),
+                    # Button("Click me!"),
+                    Div(
+                        Link("Click me!", href="https://www.google.com", target="_blank"),
+                    )
                 ),
             ),
         )
+    
+    print(b.render())
+    
+    # async def x():
+    #     result = await b.render()
+    #     print(result)
+        
+    # asyncio.run(x())
+    
+    
+    # async def main():
+    #     result = await b.render()
+    #     print(result)
+        
+# main()
     
     # x = b.filter(lambda e: e.tag == "div")
     
@@ -233,38 +252,38 @@ if __name__ == "__main__":
 
     # hero = Section()
 
-    hero = Section(
-        Header(
-            Link("Home", href="/"),
-            Nav(
-                Link("About", href="/about"),
-                Link("Contact", href="/contact"),
-                Link("Services", href="/services"),
-            ),
-        ),
-        H1("Hello, World!"),
-        Paragraph("This is a paragraph"),
-        Span("This is a span"),
-        Section(
-            Div(
-                H1("Hello, World!"),
-                Paragraph("This is a paragraph"),
-            ),
-            Div(Button("Click me!")),
-        ),
-        Link("Click me!", href="https://www.google.com", target="_blank"),
-        Form(
-            Input(name="email", placeholder="Email"),
-            Input(name="name", placeholder="Name"),
-            Input(name="number", placeholder="Number"),
-            method="POST",
-            action="/submit",
-            charset="utf-8",
-        ),
-    )
+    # hero = Section(
+    #     Header(
+    #         Link("Home", href="/"),
+    #         Nav(
+    #             Link("About", href="/about"),
+    #             Link("Contact", href="/contact"),
+    #             Link("Services", href="/services"),
+    #         ),
+    #     ),
+    #     H1("Hello, World!"),
+    #     Paragraph("This is a paragraph"),
+    #     Span("This is a span"),
+    #     Section(
+    #         Div(
+    #             H1("Hello, World!"),
+    #             Paragraph("This is a paragraph"),
+    #         ),
+    #         Div(Button("Click me!")),
+    #     ),
+    #     Link("Click me!", href="https://www.google.com", target="_blank"),
+    #     Form(
+    #         Input(name="email", placeholder="Email"),
+    #         Input(name="name", placeholder="Name"),
+    #         Input(name="number", placeholder="Number"),
+    #         method="POST",
+    #         action="/submit",
+    #         charset="utf-8",
+    #     ),
+    # )
     
-    ls = OrderedList.with_items("Item 1", "Item 2", "Item 3")
+    # ls = OrderedList.with_items("Item 1", "Item 2", "Item 3")
     
-    print(ls.render())
+    # print(ls.render())
     
     # print(hero.render())

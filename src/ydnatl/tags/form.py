@@ -39,13 +39,13 @@ class Fieldset(HTMLElement):
 class Form(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "form"})
-        
+
     @staticmethod
     def with_fields(*items, **kwargs):
         form = Form(**kwargs)
         for item in items:
-            form.append(item) # TODO: Check if item is a valid field class
-        return form        
+            form.append(item)  # TODO: Check if item is a valid field class
+        return form
 
 
 class Input(HTMLElement):
@@ -55,9 +55,11 @@ class Input(HTMLElement):
 
 class Label(HTMLElement):
     def __init__(self, *args, **kwargs):
+        if 'for_element' in kwargs:
+            kwargs['for'] = kwargs.pop('for_element')
         super().__init__(*args, **{**kwargs, "tag": "label"})
-
-
+        
+        
 class Optgroup(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "optgroup"})

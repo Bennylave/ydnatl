@@ -1,5 +1,9 @@
 # YDNATL 
 
+
+python -m src.ydnatl.tests.test_form
+
+
 YDNATL is a Python library that lets you build HTML docs using simple classes. It's great for apps that need HTML generation or rendering, so you can skip the hassle of writing HTML by hand or using a templating engine.
 
 ## Installation

@@ -5,9 +5,9 @@ class UnorderedList(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "ul"})
 
-    @staticmethod
-    def with_items(*items, **kwargs):
-        ul = UnorderedList(**kwargs)
+    @classmethod
+    def with_items(cls, *items, **kwargs):
+        ul = cls(**kwargs)
         for item in items:
             if isinstance(item, HTMLElement):
                 ul.append(item)
@@ -20,9 +20,9 @@ class OrderedList(HTMLElement):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **{**kwargs, "tag": "ol"})
 
-    @staticmethod
-    def with_items(*items, **kwargs):
-        ol = OrderedList(**kwargs)
+    @classmethod
+    def with_items(cls, *items, **kwargs):
+        ol = cls(**kwargs)
         for item in items:
             if isinstance(item, HTMLElement):
                 ol.append(item)

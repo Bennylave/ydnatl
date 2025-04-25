@@ -3,5 +3,4 @@ class ElementFactory:
         self.string = string
 
     def inflate(self):
-        # create instances from a string
-        pass
+        raise NotImplementedError("This method will be implemented in future versions.")
