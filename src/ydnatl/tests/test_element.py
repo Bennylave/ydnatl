@@ -1,5 +1,4 @@
 import unittest
-import os
 
 from src.ydnatl.core.element import HTMLElement
 from src.ydnatl.tags.layout import Div
@@ -148,7 +147,7 @@ class TestHTMLElement(unittest.TestCase):
         element = HTMLElement(tag="div")
         element.append(HTMLElement(tag="span"), HTMLElement(tag="p"))
         self.assertEqual(element.count_children(), 2)
-        
+
     def test_replace_child(self):
         """Test the replace_child() method."""
         element = HTMLElement(tag="div")

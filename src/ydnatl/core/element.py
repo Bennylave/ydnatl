@@ -237,7 +237,7 @@ class HTMLElement:
             result = f"{tag_start}>{self._text}{children_html}</{self._tag}>"
 
         if hasattr(self, "_prefix") and self._prefix:
-            result = f"{self._prefix}\n{result}"
+            result = f"{self._prefix}{result}"
 
         self.on_after_render()
         return result
