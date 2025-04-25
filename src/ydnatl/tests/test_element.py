@@ -148,6 +148,17 @@ class TestHTMLElement(unittest.TestCase):
         element = HTMLElement(tag="div")
         element.append(HTMLElement(tag="span"), HTMLElement(tag="p"))
         self.assertEqual(element.count_children(), 2)
+        
+    def test_replace_child(self):
+        """Test the replace_child() method."""
+        element = HTMLElement(tag="div")
+        element.append(HTMLElement(tag="span"), HTMLElement(tag="p"))
+        self.assertEqual(element.count_children(), 2)
+        self.assertEqual(str(element.children[0]), "<span></span>")
+        self.assertEqual(str(element.children[1]), "<p></p>")
+        element.replace_child(0, HTMLElement(tag="h1"))
+        self.assertEqual(element.count_children(), 2)
+        self.assertEqual(str(element.children[0]), "<h1></h1>")
 
     def test_callbacks(self):
         """Test the callback methods."""

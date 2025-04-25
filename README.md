@@ -6,7 +6,7 @@ YDNATL is a Python library that lets you build HTML docs using simple classes. I
 
 ## Requirements 
 
-Python 3.6 or higher is recommended
+Python `3.8` or higher is recommended
 
 ## Installation
 
@@ -38,11 +38,11 @@ print(html.render())
 
 ## Features
 
-- Declarative syntax for building HTML documents
+- Declarative syntax for building HTML documents (like Flutter)
 - Easy to read and write
 - Supports all HTML5 elements
 - Automatically generates unique IDs for elements
-- Supports event hooks for each tag
+- Event callbacks
 - Supports rendering to string, file, or sending to browser
 - Supports cloning of elements
 - Supports finding elements by attribute

@@ -132,6 +132,10 @@ class HTMLElement:
     def clone(self) -> "HTMLElement":
         """Clones the current tag."""
         return copy.deepcopy(self)
+    
+    def replace_child(self, old_index: int, new_child: "HTMLElement") -> None:
+        """Replaces a existing child element with a new child element."""
+        self._children[old_index] = new_child
 
     def find_by_attribute(
         self, attr_name: str, attr_value: Any
