@@ -53,20 +53,27 @@ This code will produce:
 </html>
 ```
 
+All element classes are subclasses of HTMLElement. The parent class provides all of the inherited functionality to generated the individual tags. Keywords args used on methods will be converted to attributes on the HTML elements being generated.
+
 ## Features
 
 - Declarative syntax for building HTML documents (like Flutter)
 - Easy to read and write
 - Supports all HTML5 elements
-- Automatically generates unique IDs for elements
-- Event callbacks
-- Supports rendering to string, file, or sending to browser
-- Supports cloning of elements
-- Supports finding elements by attribute
-- Supports getting attributes of elements
-- Supports setting attributes of elements
-- Supports counting children of elements
-- Supports self-closing tags
+- Lightweight
+- Extremely fast
+- Fully customisable
+- Compose HTML efficiently
+
+## Great For
+
+- CLI tools
+- Site builders 
+- Web frameworks
+- Alternative to heavy template engines
+- Static site generators
+- Documentation generators
+- LLM's and AI tooling that generate interfaces dynamically
 
 ## Examples
 
@@ -143,7 +150,7 @@ def index():
 
 ## Test Coverage 
 
-YDNATL has `100% test coverage`. To run the tests locally, use:
+YDNATL has full test coverage. To run the tests locally, use:
 
 ```shell
 python -m unittest discover src/ydnatl/tests
@@ -291,10 +298,63 @@ python run_test.py
 - `Time()`
 - `Code()`
 
+
+## Creating your own tags
+
+```python
+
+from ydnatl import *
+
+class MyTag(HTMLElement):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **{**kwargs, "tag": "mytag"})
+
+        self.add_attributes([
+            ("id", "mycustomid"),
+            ("aria-controls", "menu"),
+        ])
+
+    def on_load(self) -> None:
+        print("The on_load event has been called")
+
+    def on_before_render(self) -> None:
+        print("The on_before_render event has been called")
+
+    def on_after_render(self) -> None:
+        print("The on_after_render event has been called")
+
+
+mytag = MyTag(
+    Div(
+        Paragraph("Hello World!")
+    )
+)
+
+print(mytag.render())
+```
+
+This will produce:
+
+```html
+<mytag id="mycustomid" aria-controls="menu">
+   <div>
+      <p>Hello World!</p>
+   </div>
+</mytag>
+```
+
+You can use the event callbacks or properties/methods directly to load further child elements, fetch data or any other programmatic task to enrich or contruct your tag.
+
+Contributions
+-----------------
+
+Contributions, suggestions and improvements are all welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+
+
 License
 -----------------
 
-Please see [LICENSE](https://github.com/sn/ydnatl/blob/master/LICENSE) for licensing details.
+Please see [LICENSE](LICENSE) for licensing details.
 
 Author
 -----------------

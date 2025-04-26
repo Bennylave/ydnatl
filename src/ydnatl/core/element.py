@@ -111,7 +111,12 @@ class HTMLElement:
     def add_attribute(self, key: str, value: str) -> None:
         """Adds an attribute to the current tag."""
         self._attributes[key] = value
-
+        
+    def add_attributes(self, attributes: list[tuple[str, str]]) -> None:
+        """Adds multiple attributes to the current tag."""
+        for key, value in attributes:
+            self._attributes[key] = value
+        
     def remove_attribute(self, key: str) -> None:
         """Removes an attribute from the current tag."""
         self._attributes.pop(key, None)

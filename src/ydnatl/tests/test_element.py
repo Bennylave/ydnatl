@@ -183,6 +183,16 @@ class TestHTMLElement(unittest.TestCase):
         self.assertTrue(hasattr(element, "after_render_called"))
         self.assertTrue(element.after_render_called)
 
+    def test_add_attributes(self):
+        """Test the add_attributes method."""
+        element = HTMLElement(tag="div")
+        element.add_attributes([("id", "my-div"), ("class", "container")])
+        self.assertEqual(element.attributes, {"id": "my-div", "class": "container"})
+
+        # Test overwriting existing attributes
+        element.add_attributes([("id", "new-id"), ("style", "color: red")])
+        self.assertEqual(element.attributes, {"id": "new-id", "class": "container", "style": "color: red"})
+
 
 if __name__ == "__main__":
     unittest.main()
