@@ -2,6 +2,14 @@
 
 YDNATL (**Y**ou **D**on't **N**eed **A**nother **T**emplate **L**anguage) is a Python library that lets you build HTML using simple Python classes. It's great for apps that need HTML generation while skipping the hassle of writing it by hand or using a templating engine.
 
+- ✓ Declarative syntax for building HTML documents (like Flutter)
+- ✓ Easy to read and write
+- ✓ Supports all HTML5 elements
+- ✓ Lightweight
+- ✓ Extremely fast
+- ✓ Fully customisable
+- ✓ Compose HTML efficiently
+
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/underwulf)
 
 ## Requirements
@@ -81,16 +89,6 @@ print(html.render())
 ```
 
 All element classes are subclasses of HTMLElement. The parent class provides all of the inherited functionality to generated the individual tags. Keywords args used on methods will be converted to attributes on the HTML elements being generated.
-
-## Features
-
-- Declarative syntax for building HTML documents (like Flutter)
-- Easy to read and write
-- Supports all HTML5 elements
-- Lightweight
-- Extremely fast
-- Fully customisable
-- Compose HTML efficiently
 
 ## Great For
 
