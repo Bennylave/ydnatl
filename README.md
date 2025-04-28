@@ -1,10 +1,10 @@
-# YDNATL 
+# YDNATL
 
-YDNATL is a Python library that lets you build HTML docs using simple classes. It's great for apps that need HTML generation, so you can skip the hassle of writing HTML by hand or using a templating engine.
+YDNATL (**Y**ou **D**on't **N**eed **A**nother **T**emplate **L**anguage) is a Python library that lets you build HTML docs using simple classes. It's great for apps that need HTML generation, so you can skip the hassle of writing HTML by hand or using a templating engine.
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/underwulf)
 
-## Requirements 
+## Requirements
 
 Python `3.8` or higher is recommended
 
@@ -33,7 +33,7 @@ page = HTML(
 )
 
 # Render the HTML document
-print(html.render())
+print(page.render())
 ```
 
 This code will produce:
@@ -41,15 +41,15 @@ This code will produce:
 ```html
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-   <head>
-      <title>My Page</title>
-   </head>
-   <body>
-      <div>
-         <h1>Hello, World!</h1>
-         <p>This is a test document.</p>
-      </div>
-   </body>
+  <head>
+    <title>My Page</title>
+  </head>
+  <body>
+    <div>
+      <h1>Hello, World!</h1>
+      <p>This is a test document.</p>
+    </div>
+  </body>
 </html>
 ```
 
@@ -68,7 +68,7 @@ All element classes are subclasses of HTMLElement. The parent class provides all
 ## Great For
 
 - CLI tools
-- Site builders 
+- Site builders
 - Web frameworks
 - Alternative to heavy template engines
 - Static site generators
@@ -149,7 +149,7 @@ def index():
     )
 ```
 
-## Test Coverage 
+## Test Coverage
 
 YDNATL has full test coverage. To run the tests locally, use:
 
@@ -163,7 +163,7 @@ or:
 python run_test.py
 ```
 
-## Element Methods: 
+## Element Methods:
 
 - `instance.prepend()`
 - `instance.append()`
@@ -186,7 +186,7 @@ python run_test.py
 - `instance.render()`
 - `instance.to_dict()`
 
-## Events 
+## Events
 
 - `instance.on_load()`
 - `instance.on_before_render()`
@@ -203,16 +203,15 @@ python run_test.py
 
 ## Modules
 
-| **Module**         	| **Purpose**                       	| **Examples** 	|
-|--------------------	|-----------------------------------	|--------------	|
-| ydnatl.tags.form   	| Common HTML form elements         	| Examples     	|
-| ydnatl.tags.html   	| Structural HTML document elements 	| Examples     	|
-| ydnatl.tags.layout 	| Layout related HTML tags          	| Examples     	|
-| ydnatl.tags.lists  	| HTML list elements                	| Examples     	|
-| ydnatl.tags.media  	| Media related HTML elements       	| Examples     	|
-| ydnatl.tags.table  	| HTML table elements               	| Examples     	|
-| ydnatl.tags.text   	| HTML text elements                	| Examples     	|
-
+| **Module**         | **Purpose**                       | **Examples** |
+| ------------------ | --------------------------------- | ------------ |
+| ydnatl.tags.form   | Common HTML form elements         | Examples     |
+| ydnatl.tags.html   | Structural HTML document elements | Examples     |
+| ydnatl.tags.layout | Layout related HTML tags          | Examples     |
+| ydnatl.tags.lists  | HTML list elements                | Examples     |
+| ydnatl.tags.media  | Media related HTML elements       | Examples     |
+| ydnatl.tags.table  | HTML table elements               | Examples     |
+| ydnatl.tags.text   | HTML text elements                | Examples     |
 
 ## Importing
 
@@ -220,7 +219,7 @@ Instead of importing the entire module, you can selectively use only the element
 
 ```python
 
-# Instead of 
+# Instead of
 from ydnatl import *
 
 # Import selectively
@@ -250,7 +249,7 @@ from ydnatl.tags.form import Form, Button
 - `Style()`
 - `IFrame()`
 
-#### ydnatl.tags.layout 
+#### ydnatl.tags.layout
 
 - `Div()`
 - `Section()`
@@ -315,7 +314,6 @@ from ydnatl.tags.form import Form, Button
 - `Time()`
 - `Code()`
 
-
 ## Creating your own elements or components
 
 ```python
@@ -354,9 +352,9 @@ This will produce:
 
 ```html
 <mytag id="mycustomid" aria-controls="menu">
-   <div>
-      <p>Hello World!</p>
-   </div>
+  <div>
+    <p>Hello World!</p>
+  </div>
 </mytag>
 ```
 
@@ -364,17 +362,14 @@ You can use the event callbacks or properties/methods directly to load further c
 
 You can take this further and contruct an entire page as a component where everything needed for the page is contained within the element class itself. This is a great way to build websites.
 
-Contributions
------------------
+## Contributions
 
 Contributions, suggestions and improvements are all welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 
-License
------------------
+## License
 
 Please see [LICENSE](LICENSE) for licensing details.
 
-Author
------------------
+## Author
 
-[github.com/sn](https://github.com/sn) 
+[github.com/sn](https://github.com/sn)
