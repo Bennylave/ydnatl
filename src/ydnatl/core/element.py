@@ -252,5 +252,5 @@ class HTMLElement:
             "self_closing": self._self_closing,
             "attributes": self._attributes.copy(),
             "text": self._text,
-            "children": [child.to_dict() for child in self._children]
+            "children": list(map(lambda child: child.to_dict(), self._children))
         }

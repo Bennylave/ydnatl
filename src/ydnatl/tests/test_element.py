@@ -200,27 +200,24 @@ class TestHTMLElement(unittest.TestCase):
         el1 = HTMLElement(tag="span", text="Child 1")
         el1.append(HTMLElement(tag="span", text="Child 2"))
         should_be = {
-            'tag': 'span', 
-            'self_closing': False, 
-            'attributes': {
-                'text': 'Child 1'
-            }, 
-            'text': '', 
-            'children': [
+            "tag": "span",
+            "self_closing": False,
+            "attributes": {"text": "Child 1"},
+            "text": "",
+            "children": [
                 {
-                    'tag': 'span', 
-                    'self_closing': False, 
-                    'attributes': {
-                        'text': 'Child 2'
-                    }, 
-                    'text': '', 
-                    'children': []
+                    "tag": "span",
+                    "self_closing": False,
+                    "attributes": {"text": "Child 2"},
+                    "text": "",
+                    "children": [],
                 }
-            ]
+            ],
         }
         self.assertIsNotNone(el1.to_dict())
         self.assertIsInstance(el1.to_dict(), dict)
         self.assertEqual(el1.to_dict(), should_be)
-        
+
+
 if __name__ == "__main__":
     unittest.main()
