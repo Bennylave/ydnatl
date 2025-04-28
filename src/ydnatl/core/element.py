@@ -54,8 +54,6 @@ class HTMLElement:
             self._children.append(child)
         elif isinstance(child, str):
             self._text += child
-        else:
-            raise ValueError(f"Invalid child type: {child}")
 
     def prepend(self, *children: Union["HTMLElement", str, List[Any]]) -> None:
         """Prepends children to the current tag."""
@@ -64,7 +62,6 @@ class HTMLElement:
             if isinstance(child, HTMLElement):
                 new_children.append(child)
             elif isinstance(child, str):
-                # For strings, we simply prepend the text.
                 self._text = child + self._text
             else:
                 raise ValueError(f"Invalid child type: {child}")
@@ -94,7 +91,7 @@ class HTMLElement:
 
     def clear(self) -> None:
         """Clears all children from the tag."""
-        self._children = []
+        self._children.clear()
 
     def pop(self, index: int = 0) -> "HTMLElement":
         """Pops a child from the tag."""
@@ -142,17 +139,18 @@ class HTMLElement:
         """Replaces a existing child element with a new child element."""
         self._children[old_index] = new_child
 
-    def find_by_attribute(
-        self, attr_name: str, attr_value: Any
-    ) -> Union["HTMLElement", None]:
+    def find_by_attribute(self, attr_name: str, attr_value: Any) -> Union["HTMLElement", None]:
         """Finds a child by an attribute."""
-        for child in self._children:
-            if child.get_attribute(attr_name) == attr_value:
-                return child
-            nested_result = child.find_by_attribute(attr_name, attr_value)
-            if nested_result:
-                return nested_result
-        return None
+        def _find(element: "HTMLElement") -> Union["HTMLElement", None]:
+            if element.get_attribute(attr_name) == attr_value:
+                return element
+            for child in element._children:
+                result = _find(child)
+                if result:
+                    return result
+            return None
+
+        return _find(self)
 
     def get_attributes(self, *keys: str) -> dict:
         """Returns the attributes of the current tag."""
@@ -246,3 +244,13 @@ class HTMLElement:
 
         self.on_after_render()
         return result
+    
+    @functools.lru_cache(maxsize=None)
+    def to_dict(self) -> dict:
+        return {
+            "tag": self._tag,
+            "self_closing": self._self_closing,
+            "attributes": self._attributes.copy(),
+            "text": self._text,
+            "children": [child.to_dict() for child in self._children]
+        }

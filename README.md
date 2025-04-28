@@ -20,7 +20,7 @@ pip install ydnatl
 from ydnatl import *
 
 # Create a simple HTML document
-html = HTML(
+page = HTML(
     Head(
         Title("My Page")
     ),
@@ -74,6 +74,7 @@ All element classes are subclasses of HTMLElement. The parent class provides all
 - Static site generators
 - Documentation generators
 - LLM's and AI tooling that generate interfaces dynamically
+- Creating frontends for headless platforms (CMS/CRM etc)
 
 ## Examples
 
@@ -173,6 +174,7 @@ python run_test.py
 - `instance.first()`
 - `instance.last()`
 - `instance.add_attribute()`
+- `instance.add_attributes()`
 - `instance.remove_attribute()`
 - `instance.get_attribute()`
 - `instance.has_attribute()`
@@ -182,6 +184,7 @@ python run_test.py
 - `instance.get_attributes()`
 - `instance.count_children()`
 - `instance.render()`
+- `instance.to_dict()`
 
 ## Events 
 
@@ -209,6 +212,20 @@ python run_test.py
 | ydnatl.tags.media  	| Media related HTML elements       	| Examples     	|
 | ydnatl.tags.table  	| HTML table elements               	| Examples     	|
 | ydnatl.tags.text   	| HTML text elements                	| Examples     	|
+
+
+## Importing
+
+Instead of importing the entire module, you can selectively use only the elements you need like this:
+
+```python
+
+# Instead of 
+from ydnatl import *
+
+# Import selectively
+from ydnatl.tags.form import Form, Button
+```
 
 #### ydnatl.tags.form
 
@@ -299,7 +316,7 @@ python run_test.py
 - `Code()`
 
 
-## Creating your own tags
+## Creating your own elements or components
 
 ```python
 
@@ -343,13 +360,14 @@ This will produce:
 </mytag>
 ```
 
-You can use the event callbacks or properties/methods directly to load further child elements, fetch data or any other programmatic task to enrich or contruct your tag.
+You can use the event callbacks or properties/methods directly to load further child elements, fetch data or any other programmatic task to enrich or contruct your tag on loading, render or even after render.
+
+You can take this further and contruct an entire page as a component where everything needed for the page is contained within the element class itself. This is a great way to build websites.
 
 Contributions
 -----------------
 
 Contributions, suggestions and improvements are all welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
-
 
 License
 -----------------
