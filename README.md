@@ -10,8 +10,6 @@ YDNATL (**Y**ou **D**on't **N**eed **A**nother **T**emplate **L**anguage) is a P
 - ✓ Fully customisable
 - ✓ Compose HTML efficiently
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/underwulf)
-
 ## Requirements
 
 Python `3.8` or higher is recommended
@@ -396,5 +394,7 @@ Contributions, suggestions and improvements are all welcome. Please see [CONTRIB
 Please see [LICENSE](LICENSE) for licensing details.
 
 ## Author
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/underwulf)
 
 [github.com/sn](https://github.com/sn)
