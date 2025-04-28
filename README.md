@@ -6,13 +6,13 @@ YDNATL (**Y**ou **D**on't **N**eed **A**nother **T**emplate **L**anguage) is a P
 - ✓ Easy to read and write
 - ✓ Supports all HTML5 elements
 - ✓ Lightweight
-- ✓ Extremely fast
+- ✓ Extremely fast (rendering offloaded to C)
 - ✓ Fully customisable
 - ✓ Compose HTML efficiently
 
 ## Requirements
 
-Python `3.8` or higher is recommended
+Python `3.8` or higher is recommended.
 
 ## Installation
 
@@ -78,7 +78,7 @@ body.append(
 if day_of_week == "Monday": 
     header.append(Title("Unfortunately, it's Monday!"))
 else:
-    header.append(Title("Great! It' no longer Monday!"))
+    header.append(Title("Great! It's no longer Monday!"))
 
 html.append(header)
 html.append(body)
