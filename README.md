@@ -53,6 +53,33 @@ This code will produce:
 </html>
 ```
 
+### Dynamic Composition 
+
+```python
+from ydnatl import *
+
+html = HTML()
+header = Head()
+body = Body()
+
+body.append(
+    Div(
+        H1("My Headline"),
+        Paragraph("Basic paragraph element"),
+    )
+)
+
+if day_of_week == "Monday": 
+    header.append(Title("Unfortunately, it's Monday!"))
+else:
+    header.append(Title("Great! It' no longer Monday!"))
+
+html.append(header)
+html.append(body)
+
+print(html.render())
+```
+
 All element classes are subclasses of HTMLElement. The parent class provides all of the inherited functionality to generated the individual tags. Keywords args used on methods will be converted to attributes on the HTML elements being generated.
 
 ## Features
