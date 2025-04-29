@@ -402,7 +402,7 @@ pip install --upgrade pip
 2. Install the dev dependencies:
 
 ```
-pip install .[dev]
+pip install ".[dev]"
 ```
 
 3. Run the tests:
