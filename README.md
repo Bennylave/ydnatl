@@ -12,7 +12,7 @@ YDNATL (**Y**ou **D**on't **N**eed **A**nother **T**emplate **L**anguage) is a P
 
 ## Requirements
 
-Python `3.8` or higher is recommended.
+Python `3.9` or higher is recommended.
 
 ## Installation
 
