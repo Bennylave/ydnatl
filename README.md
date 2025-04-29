@@ -6,7 +6,7 @@ YDNATL (**Y**ou **D**on't **N**eed **A**nother **T**emplate **L**anguage) is a P
 - ✓ Easy to read and write
 - ✓ Supports all HTML5 elements
 - ✓ Lightweight
-- ✓ Extremely fast (rendering offloaded to C)
+- ✓ Extremely fast
 - ✓ Fully customisable
 - ✓ Compose HTML efficiently
 
