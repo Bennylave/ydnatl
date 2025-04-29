@@ -177,7 +177,7 @@ def index():
 YDNATL has full test coverage. To run the tests locally, use:
 
 ```shell
-python -m unittest discover src/ydnatl/tests
+pytest
 ```
 
 or:
