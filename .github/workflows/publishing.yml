@@ -32,7 +32,9 @@ jobs:
 
   pypi-publish:
     runs-on: ubuntu-latest
-
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ydnatl
     needs:
       - release-build
 
