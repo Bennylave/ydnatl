@@ -1,6 +1,6 @@
 import unittest
 
-from src.ydnatl.tags.lists import (
+from ydnatl.tags.lists import (
     UnorderedList,
     OrderedList,
     ListItem,
@@ -9,7 +9,7 @@ from src.ydnatl.tags.lists import (
     DescriptionList,
     DescriptionTerm,
 )
-from src.ydnatl.core.element import HTMLElement
+from ydnatl.core.element import HTMLElement
 
 
 class TestListTags(unittest.TestCase):

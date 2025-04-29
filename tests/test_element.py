@@ -1,8 +1,8 @@
 import unittest
 
-from src.ydnatl.core.element import HTMLElement
-from src.ydnatl.tags.layout import Div
-from src.ydnatl.tags.text import Span, Paragraph
+from ydnatl.core.element import HTMLElement
+from ydnatl.tags.layout import Div
+from ydnatl.tags.text import Span, Paragraph
 
 
 class TestHTMLElement(unittest.TestCase):

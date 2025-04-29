@@ -1,6 +1,6 @@
 import unittest
 
-from src.ydnatl.tags.text import (
+from ydnatl.tags.text import (
     H1,
     H2,
     H3,
@@ -24,7 +24,7 @@ from src.ydnatl.tags.text import (
     Time,
     Code,
 )
-from src.ydnatl.core.element import HTMLElement
+from ydnatl.core.element import HTMLElement
 
 
 class TestTextTags(unittest.TestCase):

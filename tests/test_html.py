@@ -1,6 +1,6 @@
 import unittest
 
-from src.ydnatl.tags.html import (
+from ydnatl.tags.html import (
     HTML,
     Head,
     Body,
@@ -11,7 +11,7 @@ from src.ydnatl.tags.html import (
     Style,
     IFrame,
 )
-from src.ydnatl.core.element import HTMLElement
+from ydnatl.core.element import HTMLElement
 
 
 class TestHTMLTags(unittest.TestCase):

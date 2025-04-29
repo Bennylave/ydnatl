@@ -4,7 +4,7 @@ import tempfile
 import csv
 import json
 
-from src.ydnatl.tags.table import (
+from ydnatl.tags.table import (
     Table,
     TableFooter,
     TableHeaderCell,
@@ -13,7 +13,7 @@ from src.ydnatl.tags.table import (
     TableDataCell,
     TableRow,
 )
-from src.ydnatl.core.element import HTMLElement
+from ydnatl.core.element import HTMLElement
 
 
 class TestTableTags(unittest.TestCase):
