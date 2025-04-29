@@ -228,13 +228,13 @@ python run_test.py
 
 | **Module**         | **Purpose**                       | **Examples** |
 | ------------------ | --------------------------------- | ------------ |
-| ydnatl.tags.form   | Common HTML form elements         | Examples     |
-| ydnatl.tags.html   | Structural HTML document elements | Examples     |
-| ydnatl.tags.layout | Layout related HTML tags          | Examples     |
-| ydnatl.tags.lists  | HTML list elements                | Examples     |
-| ydnatl.tags.media  | Media related HTML elements       | Examples     |
-| ydnatl.tags.table  | HTML table elements               | Examples     |
-| ydnatl.tags.text   | HTML text elements                | Examples     |
+| ydnatl.tags.form   | Common HTML form elements         | TODO         |
+| ydnatl.tags.html   | Structural HTML document elements | TODO         |
+| ydnatl.tags.layout | Layout related HTML tags          | TODO         |
+| ydnatl.tags.lists  | HTML list elements                | TODO         |
+| ydnatl.tags.media  | Media related HTML elements       | TODO         |
+| ydnatl.tags.table  | HTML table elements               | TODO         |
+| ydnatl.tags.text   | HTML text elements                | TODO         |
 
 ## Importing
 
@@ -387,7 +387,31 @@ You can take this further and contruct an entire page as a component where every
 
 ## Contributions
 
-Contributions, suggestions and improvements are all welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+Contributions, suggestions and improvements are all welcome. 
+
+#### Developing YDANTL
+
+1. Create a virtual environment
+
+```
+python3.12 -m venv .venv 
+source .venv/bin/activate 
+pip install --upgrade pip
+```
+
+2. Install the dev dependencies:
+
+```
+pip install .[dev]
+```
+
+3. Run the tests:
+
+```
+python run_tests.py
+```
+
+When you are happy with your changes, create a merge request.
 
 ## License
 

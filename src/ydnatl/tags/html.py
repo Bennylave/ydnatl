@@ -1,4 +1,4 @@
-from src.ydnatl.core.element import HTMLElement
+from ydnatl.core.element import HTMLElement
 
 
 class HTML(HTMLElement):

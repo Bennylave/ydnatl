@@ -1,7 +1,7 @@
 import csv
 import json
 
-from src.ydnatl.core.element import HTMLElement
+from ydnatl.core.element import HTMLElement
 
 
 class Table(HTMLElement):
