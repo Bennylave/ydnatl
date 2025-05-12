@@ -419,6 +419,4 @@ Please see [LICENSE](LICENSE) for licensing details.
 
 ## Author
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/underwulf)
-
 [github.com/sn](https://github.com/sn)
