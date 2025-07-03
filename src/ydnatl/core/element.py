@@ -16,13 +16,17 @@ class HTMLElement:
         self_closing: bool = False,
         **attributes: str,
     ):
+        PRESERVE_UNDERSCORE = {"class_name"}
+        
         if not tag:
             raise ValueError("A valid HTML tag name is required")
+        
+        fixed_attributes = {(k if k in PRESERVE_UNDERSCORE else k.replace("_", "-")): v for k, v in attributes.items()}
 
         self._tag: str = tag
         self._children: List[HTMLElement] = []
         self._text: str = ""
-        self._attributes: dict = attributes
+        self._attributes: dict = fixed_attributes
         self._self_closing: bool = self_closing
 
         if os.environ.get("YDNATL_GENERATE_IDS"):
