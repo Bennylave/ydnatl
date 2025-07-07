@@ -2,6 +2,15 @@ import csv
 import json
 
 from ydnatl.core.element import HTMLElement
+from ydnatl.tags.tag_factory import simple_tag_class
+
+
+TableFooter = simple_tag_class("tfoot")
+TableHeaderCell = simple_tag_class("th")
+TableHeader = simple_tag_class("thead")
+TableBody = simple_tag_class("tbody")
+TableDataCell = simple_tag_class("td")
+TableRow = simple_tag_class("tr")
 
 
 class Table(HTMLElement):
@@ -49,33 +58,3 @@ class Table(HTMLElement):
         except UnicodeDecodeError:
             raise ValueError(f"Encoding error: {encoding} is not suitable for the file")
         return table
-
-
-class TableFooter(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "tfoot"})
-
-
-class TableHeaderCell(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "th"})
-
-
-class TableHeader(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "thead"})
-
-
-class TableBody(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "tbody"})
-
-
-class TableDataCell(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "td"})
-
-
-class TableRow(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "tr"})

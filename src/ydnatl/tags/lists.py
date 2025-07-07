@@ -1,4 +1,14 @@
 from ydnatl.core.element import HTMLElement
+from ydnatl.tags.tag_factory import simple_tag_class
+
+
+UnorderedList = simple_tag_class("ul")
+OrderedList = simple_tag_class("ol")
+ListItem = simple_tag_class("li")
+Datalist = simple_tag_class("datalist")
+DescriptionDetails = simple_tag_class("dd")
+DescriptionList = simple_tag_class("dl")
+DescriptionTerm = simple_tag_class("dt")
 
 
 class UnorderedList(HTMLElement):
@@ -29,28 +39,3 @@ class OrderedList(HTMLElement):
             else:
                 ol.append(ListItem(item))
         return ol
-
-
-class ListItem(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "li"})
-
-
-class Datalist(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "datalist"})
-
-
-class DescriptionDetails(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "dd"})
-
-
-class DescriptionList(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "dl"})
-
-
-class DescriptionTerm(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "dt"})
