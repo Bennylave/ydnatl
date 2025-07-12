@@ -1,18 +1,20 @@
 from ydnatl.core.element import HTMLElement
+from ydnatl.tags.tag_factory import simple_tag_class
 
 
-class Textarea(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "textarea"})
+Textarea = simple_tag_class("textarea")
+Select = simple_tag_class("select")
+Option = simple_tag_class("option")
+Button = simple_tag_class("button")
+Fieldset = simple_tag_class("fieldset")
+Input = simple_tag_class("input", self_closing=True)
+Optgroup = simple_tag_class("optgroup")
 
 
-class Select(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "select"})
-
-    @staticmethod
-    def with_items(*items, **kwargs):
-        opt = Select(**kwargs)
+class Select(Select):
+    @classmethod
+    def with_items(cls, *items, **kwargs):
+        opt = cls(**kwargs)
         for item in items:
             if isinstance(item, HTMLElement):
                 opt.append(item)
@@ -21,19 +23,12 @@ class Select(HTMLElement):
         return opt
 
 
-class Option(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "option"})
+def label_extra_init(self, kwargs):
+    if "for_element" in kwargs:
+        kwargs["for"] = kwargs.pop("for_element")
 
 
-class Button(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "button"})
-
-
-class Fieldset(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "fieldset"})
+Label = simple_tag_class("label", extra_init=label_extra_init)
 
 
 class Form(HTMLElement):
@@ -43,23 +38,20 @@ class Form(HTMLElement):
     @staticmethod
     def with_fields(*items, **kwargs):
         form = Form(**kwargs)
+        valid_types = (
+            Input,
+            Textarea,
+            Select,
+            Option,
+            Button,
+            Fieldset,
+            Label,
+            Optgroup,
+        )
         for item in items:
-            form.append(item)  # TODO: Check if item is a valid field class
+            if not isinstance(item, valid_types):
+                raise TypeError(
+                    f"Invalid form field: {item!r} (type {type(item).__name__})"
+                )
+            form.append(item)
         return form
-
-
-class Input(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "input", "self_closing": True})
-
-
-class Label(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        if 'for_element' in kwargs:
-            kwargs['for'] = kwargs.pop('for_element')
-        super().__init__(*args, **{**kwargs, "tag": "label"})
-        
-        
-class Optgroup(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "optgroup"})

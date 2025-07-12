@@ -1,111 +1,25 @@
-from ydnatl.core.element import HTMLElement
+from ydnatl.tags.tag_factory import simple_tag_class
 
 
-class H1(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "h1"})
-
-
-class H2(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "h2"})
-
-
-class H3(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "h3"})
-
-
-class H4(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "h4"})
-
-
-class H5(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "h5"})
-
-
-class H6(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "h6"})
-
-
-class Paragraph(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "p"})
-
-
-class Blockquote(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "blockquote"})
-
-
-class Pre(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "pre"})
-
-
-class Quote(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "q"})
-
-
-class Cite(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "cite"})
-
-
-class Em(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "em"})
-
-
-class Italic(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "i"})
-
-
-class Span(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "span"})
-
-
-class Strong(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "strong"})
-
-
-class Abbr(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "abbr"})
-
-
-class Link(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "a"})
-
-
-class Small(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "small"})
-
-
-class Superscript(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "sup"})
-
-
-class Subscript(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "sub"})
-
-
-class Time(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "time"})
-
-
-class Code(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "code"})
+H1 = simple_tag_class("h1")
+H2 = simple_tag_class("h2")
+H3 = simple_tag_class("h3")
+H4 = simple_tag_class("h4")
+H5 = simple_tag_class("h5")
+H6 = simple_tag_class("h6")
+Paragraph = simple_tag_class("p")
+Blockquote = simple_tag_class("blockquote")
+Pre = simple_tag_class("pre")
+Quote = simple_tag_class("q")
+Cite = simple_tag_class("cite")
+Em = simple_tag_class("em")
+Italic = simple_tag_class("i")
+Span = simple_tag_class("span")
+Strong = simple_tag_class("strong")
+Abbr = simple_tag_class("abbr")
+Link = simple_tag_class("a")
+Small = simple_tag_class("small")
+Superscript = simple_tag_class("sup")
+Subscript = simple_tag_class("sub")
+Time = simple_tag_class("time")
+Code = simple_tag_class("code")

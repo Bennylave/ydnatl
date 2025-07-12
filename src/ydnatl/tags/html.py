@@ -1,4 +1,5 @@
 from ydnatl.core.element import HTMLElement
+from ydnatl.tags.tag_factory import simple_tag_class
 
 
 class HTML(HTMLElement):
@@ -8,47 +9,17 @@ class HTML(HTMLElement):
             **{
                 **kwargs | {"lang": "en", "dir": "ltr"},
                 "tag": "html",
-                "self_closing": False
+                "self_closing": False,
             },
         )
         self._prefix = "<!DOCTYPE html>"
 
 
-class Head(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "head"})
-
-
-class Body(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "body"})
-
-
-class Title(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "title"})
-
-
-class Meta(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "meta", "self_closing": True})
-
-
-class Link(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "link", "self_closing": True})
-
-
-class Script(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "script"})
-
-
-class Style(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "style"})
-
-
-class IFrame(HTMLElement):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **{**kwargs, "tag": "iframe"})
+Head = simple_tag_class("head")
+Body = simple_tag_class("body")
+Title = simple_tag_class("title")
+Meta = simple_tag_class("meta", self_closing=True)
+Link = simple_tag_class("link", self_closing=True)
+Script = simple_tag_class("script")
+Style = simple_tag_class("style")
+IFrame = simple_tag_class("iframe")
