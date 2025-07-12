@@ -3,7 +3,7 @@ from ydnatl.tags.tag_factory import simple_tag_class
 
 
 Textarea = simple_tag_class("textarea")
-Select = simple_tag_class("select")
+BaseSelect = simple_tag_class("select")
 Option = simple_tag_class("option")
 Button = simple_tag_class("button")
 Fieldset = simple_tag_class("fieldset")
@@ -11,7 +11,7 @@ Input = simple_tag_class("input", self_closing=True)
 Optgroup = simple_tag_class("optgroup")
 
 
-class Select(Select):
+class Select(BaseSelect):
     @classmethod
     def with_items(cls, *items, **kwargs):
         opt = cls(**kwargs)

@@ -230,7 +230,6 @@ class HTMLElement:
         )
         return f" {attr_str}" if attr_str else ""
 
-    @functools.lru_cache(maxsize=None)
     def render(self) -> str:
         """Renders the HTML element and its children to a string."""
         self.on_before_render()
@@ -249,7 +248,6 @@ class HTMLElement:
         self.on_after_render()
         return result
     
-    @functools.lru_cache(maxsize=None)
     def to_dict(self) -> dict:
         return {
             "tag": self._tag,
