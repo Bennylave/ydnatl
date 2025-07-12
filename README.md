@@ -12,7 +12,7 @@ YDNATL (**Y**ou **D**on't **N**eed **A**nother **T**emplate **L**anguage) is a P
 
 ## Requirements
 
-Python `3.9` or higher is recommended.
+Python `3.8` or higher is required.
 
 ## Installation
 
@@ -64,6 +64,9 @@ This code will produce:
 ```python
 from ydnatl import *
 
+# Dynamic content based on conditions
+day_of_week = "Monday"  # Example variable
+
 html = HTML()
 header = Head()
 body = Body()
@@ -86,7 +89,22 @@ html.append(body)
 print(html.render())
 ```
 
-All element classes are subclasses of HTMLElement. The parent class provides all of the inherited functionality to generated the individual tags. Keywords args used on methods will be converted to attributes on the HTML elements being generated.
+All element classes are subclasses of HTMLElement. The parent class provides all of the inherited functionality to generate the individual tags. Keyword arguments passed to element constructors will be converted to attributes on the HTML elements being generated.
+
+### Working with Attributes
+
+```python
+from ydnatl import *
+
+# Add attributes via constructor
+div = Div(id="my-div", class_name="container", data_value="123")
+
+# Add attributes after creation
+div.add_attribute("role", "main")
+div.add_attributes([("aria-label", "Main content"), ("tabindex", "0")])
+
+# HTML output: <div id="my-div" class="container" data-value="123" role="main" aria-label="Main content" tabindex="0"></div>
+```
 
 ## Great For
 
@@ -136,7 +154,7 @@ def index(request):
             Title("My Page"),
             Meta(charset="utf-8"),
             Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
-            Link(rel="stylesheet", href="style.css"),
+            HtmlLink(rel="stylesheet", href="style.css"),
             Script(src="script.js")
         ),
         Body(
@@ -226,27 +244,29 @@ python run_test.py
 
 ## Modules
 
-| **Module**         | **Purpose**                       | **Examples** |
+| **Module**         | **Purpose**                       | **Key Elements** |
 | ------------------ | --------------------------------- | ------------ |
-| ydnatl.tags.form   | Common HTML form elements         | TODO         |
-| ydnatl.tags.html   | Structural HTML document elements | TODO         |
-| ydnatl.tags.layout | Layout related HTML tags          | TODO         |
-| ydnatl.tags.lists  | HTML list elements                | TODO         |
-| ydnatl.tags.media  | Media related HTML elements       | TODO         |
-| ydnatl.tags.table  | HTML table elements               | TODO         |
-| ydnatl.tags.text   | HTML text elements                | TODO         |
+| ydnatl.tags.form   | Common HTML form elements         | Form, Input, Button, Select, Textarea |
+| ydnatl.tags.html   | Structural HTML document elements | HTML, Head, Body, Title, Meta, Script |
+| ydnatl.tags.layout | Layout related HTML tags          | Div, Section, Header, Nav, Footer, Main |
+| ydnatl.tags.lists  | HTML list elements                | UnorderedList, OrderedList, ListItem |
+| ydnatl.tags.media  | Media related HTML elements       | Image, Video, Audio, Figure, Canvas |
+| ydnatl.tags.table  | HTML table elements               | Table, TableRow, TableHeaderCell, TableDataCell |
+| ydnatl.tags.text   | HTML text elements                | H1-H6, Paragraph, Span, Strong, Em |
 
 ## Importing
 
 Instead of importing the entire module, you can selectively use only the elements you need like this:
 
 ```python
-
-# Instead of
+# Instead of importing everything
 from ydnatl import *
 
-# Import selectively
-from ydnatl.tags.form import Form, Button
+# Import selectively for better performance and clarity
+from ydnatl.tags.form import Form, Button, Input
+from ydnatl.tags.html import HTML, Head, Body, Title
+from ydnatl.tags.layout import Div, Section
+from ydnatl.tags.text import H1, Paragraph
 ```
 
 #### ydnatl.tags.form
@@ -254,6 +274,7 @@ from ydnatl.tags.form import Form, Button
 - `Form()`
 - `Input()`
 - `Label()`
+- `Textarea()`
 - `Select()`
 - `Option()`
 - `Button()`
@@ -267,7 +288,7 @@ from ydnatl.tags.form import Form, Button
 - `Body()`
 - `Title()`
 - `Meta()`
-- `Link()`
+- `HtmlLink()` (use instead of `Link()` to avoid conflicts)
 - `Script()`
 - `Style()`
 - `IFrame()`
@@ -284,6 +305,7 @@ from ydnatl.tags.form import Form, Button
 
 #### ydnatl.tags.lists
 
+- `UnorderedList()`
 - `OrderedList()`
 - `ListItem()`
 - `Datalist()`
@@ -389,26 +411,28 @@ You can take this further and contruct an entire page as a component where every
 
 Contributions, suggestions and improvements are all welcome. 
 
-#### Developing YDANTL
+#### Developing YDNATL
 
 1. Create a virtual environment
 
-```
-python3.12 -m venv .venv 
-source .venv/bin/activate 
+```bash
+python3 -m venv .venv 
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install --upgrade pip
 ```
 
 2. Install the dev dependencies:
 
-```
+```bash
 pip install ".[dev]"
 ```
 
 3. Run the tests:
 
-```
+```bash
 python run_tests.py
+# or
+pytest
 ```
 
 When you are happy with your changes, create a merge request.
